@@ -14,7 +14,7 @@ This material is for intermediate-level data scientists, developers, data engine
 
 Coming soon...
 
-## ML/AI with Tensorflow or PyTorch
+## Deep Learning with Tensorflow or PyTorch
 
 Coming soon...
 
