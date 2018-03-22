@@ -12,7 +12,9 @@ This material is for intermediate-level data scientists, developers, data engine
 
 ## Machine Learning with Go
 
-Coming soon...
+This is material for any Go developer, data scientist, analyst, or statistician who wishes to learn how to build robust machine learning applications in Go. This class provides an intensive, comprehensive and idiomatic view on training, utilizing, evaluating, and deploying machine learning models using Go. We believe this class is perfect for anyone wishing to build data-driven applications that produce valuable insights, have reproducible behavior, and can be deployed within modern architectures.
+
+[Machine Learning with Go](machine-learning-with-go)
 
 ## Deep Learning with Tensorflow or PyTorch
 
