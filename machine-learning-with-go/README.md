@@ -4,13 +4,19 @@ This is material for any Go developer, data scientist, analyst, or statistician 
 
 *Note: This material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class.*
 
-## Blah 
+## Working with ML Data Sets in Go 
 
 Blah
 
 [blah](blah)
 
-## Blah
+## Regression
+
+This material...
+
+[blah](blah)
+
+## Classification
 
 This material...
 
