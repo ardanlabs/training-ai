@@ -5,7 +5,7 @@
   "transform": {
     "image": "dwhitena/nb-to-prod:infer",
     "cmd": [ "/bin/bash" ],
-    "stdin": [ "python3 /code/infer.py /pfs/model/model.pt $attributes /pfs/out/" ]
+    "stdin": [ "python3 /code/infer.py /pfs/train/model.pt $attributes /pfs/out/" ]
   },
   "parallelism_spec": {
     "constant": "1"
@@ -20,7 +20,7 @@
       },
       {
 	"atom": {
-	  "repo": "model",
+	  "repo": "train",
 	  "glob": "/"
 	}
       }
