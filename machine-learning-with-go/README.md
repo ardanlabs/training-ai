@@ -6,11 +6,17 @@ This is material for any Go developer, data scientist, analyst, or statistician 
 
 ## Working with ML Data in Go 
 
-Ingress/egress, parsing, evaluation, validation, ...
+Blah...
 
 [blah](blah)
 
-## Supervised ML
+## Regression
+
+This material...
+
+[blah](blah)
+
+## Classification
 
 Blah
 
