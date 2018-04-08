@@ -4,13 +4,13 @@ This material is for intermediate-level data scientists, developers, data engine
 
 *Note: This material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class.*
 
-## Intro to productionizing ML/AI 
+## 1. Intro to productionizing ML/AI 
 
-This material introduces some common pain points and pitfalls that people fall into when trying to productionize data science work. Once your are done with this material, you will understand what the common pain points are and the guiding principles that will help us overcome them.  the basic principles and procedures of rigorous data analysis and motivates the use of Go in this context.   
+This material introduces some common pain points and pitfalls that people fall into when trying to productionize data science work. Once your are done with this material, you will understand what the common pain points are and the guiding principles that will help us overcome them.    
 
 [Introduction to productioning ML/AI](introduction/README.md)
 
-## Blah
+## 2. Blah
 
 This material...
 
