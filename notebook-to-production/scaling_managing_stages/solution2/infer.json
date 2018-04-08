@@ -1,0 +1,29 @@
+{
+  "pipeline": {
+    "name": "inference"
+  },
+  "transform": {
+    "image": "dwhitena/nb-to-prod:infer",
+    "cmd": [ "/bin/bash" ],
+    "stdin": [ "python3 /code/infer.py /pfs/model/model.pt $attributes /pfs/out/" ]
+  },
+  "parallelism_spec": {
+    "constant": "1"
+  },
+  "input": {
+    "cross": [
+      {
+        "atom": {
+	  "repo": "attributes",
+	  "glob": "/*"
+	}
+      },
+      {
+	"atom": {
+	  "repo": "model",
+	  "glob": "/"
+	}
+      }
+    ]
+  }
+}

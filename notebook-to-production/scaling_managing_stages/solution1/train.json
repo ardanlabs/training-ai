@@ -1,0 +1,24 @@
+{
+  "pipeline": {
+    "name": "train"
+  },
+  "transform": {
+    "image": "dwhitena/nb-to-prod:train",
+    "cmd": [ 
+      "python3",
+      "/code/train.py", 
+      "/pfs/pre_process/x_train.csv",
+      "/pfs/pre_process/y_train.csv", 
+      "/pfs/out/" 
+    ]
+  },
+  "parallelism_spec": {
+    "constant": "1"
+  },
+  "input": {
+    "atom": {
+      "repo": "pre_process",
+      "glob": "/"
+    }
+  }
+}

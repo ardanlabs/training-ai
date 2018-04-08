@@ -1,0 +1,19 @@
+{
+  "pipeline": {
+    "name": "pre_process"
+  },
+  "transform": {
+    "image": "dwhitena/nb-to-prod:pre-process",
+    "cmd": [ "/bin/bash" ],
+    "stdin": [ "python3 /code/pre_process.py $training /pfs/out/" ]
+  },
+  "parallelism_spec": {
+    "constant": "1"
+  },
+  "input": {
+    "atom": {
+      "repo": "training",
+      "glob": "/*"
+    }
+  }
+}
