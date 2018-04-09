@@ -103,25 +103,25 @@ Generally, Docker images are stored and versioned in a *Docker registry*. [Docke
 You should be able to replace `dwhitena` below with your Docker Hub username:
 
 ```
-$ sudo docker tag amld-test dwhitena/amld-test
+$ sudo docker tag pre-process dwhitena/pre-process
 $ sudo docker login
 Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
 Username: dwhitena
 Password:
 Login Succeeded
-$ sudo docker push dwhitena/amld-test
-The push refers to a repository [docker.io/dwhitena/amld-test]
-ec5f135f5bb2: Pushed
-9ef903179678: Pushed
-6dce5c484bde: Mounted from library/python
-057c34df1f1a: Mounted from library/python
-3d358bf2f209: Mounted from library/python
-0870b36b7599: Mounted from library/python
-8fe6d5dcea45: Mounted from library/python
-06b8d020c11b: Mounted from library/python
-b9914afd042f: Mounted from library/python
-4bcdffd70da2: Mounted from library/python
-latest: digest: sha256:37769825d1408cbb0a880bd574d025beb5d0e16ae37f4bbe2f18c4c58d8ac447 size: 2427
+$ sudo docker push dwhitena/pre-process
+The push refers to a repository [docker.io/dwhitena/pre-process]
+d370dc3d40b4: Pushed
+3e205a7e1532: Pushed
+3523755f4e34: Pushed
+9e17bfee4bf6: Pushed
+cdcaace38a54: Pushed
+6e1b48dc2ccc: Pushed
+ff57bdb79ac8: Pushed
+6e5e20cbf4a7: Pushed
+86985c679800: Pushed
+8fad67424c4e: Pushed
+latest: digest: sha256:fd28b3993efcbaeb4ceb6885435839483d5cc74360565db16b9708df7ee741f7 size: 2427
 ```
 
 ### 2. Docker-ize and run our training stage 
