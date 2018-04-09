@@ -75,7 +75,8 @@ You can start with [template2.py](exercise2/template2.py) and check [solution2.p
 
 ## Resources
 
-- Blah.
+- [Python command line arguments](https://docs.python.org/3.3/library/argparse.html)
+- [Saving/loading PyTorch models](http://pytorch.org/docs/0.3.1/notes/serialization.html#recommend-saving-models)
 
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
