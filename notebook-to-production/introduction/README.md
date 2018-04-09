@@ -46,17 +46,17 @@ Once, you are logged into your workshop instance, you will need to retrieve the 
 $ git clone https://github.com/ardanlabs/training-ai.git
 ```
 
-This will pull down the workshop materials to your instance. To confirm that the materials are there, you can navigate to the training-ai directory and the list contents. You should see:
+This will pull down the workshop materials to your instance. To confirm that the materials are there, you can navigate to the `training-ai/notebook-to-production` directory and the list contents. You should see:
 
 ```
-$ cd training-ai
+$ cd training-ai/notebook-to-production/
 $ ls
-README.md               deploying_stages        introduction            pipeline_stages         scaling_managing_stages
+deploying_managing  frameworks_that_scale  introduction  pipeline_stages  portability  README.md
 ```
 
 ## 3. Starting Jupyter
 
-Now, we are going to start our journey to production with a familiar Python workflow contained in a jupyter notebook. Navigate to the `introduction` directory and then start Jupyter as follows:
+Now, we are going to start our journey to production with a familiar Python workflow contained in a Jupyter notebook. Navigate to the `introduction` directory and then start Jupyter as follows:
 
 ```
 $ cd introduction
@@ -73,7 +73,7 @@ While you have Jupyter up and running, click on the `example_sklearn_workflow.ip
 - type `shift+enter` to execute a code block (or use the widgets at the top of the UI)
 - if you get in a pickle, you might try selecting the "Kernel" menu at the top of the UI and then select "Restart Kernel" or similar.
 
-We will run through and discuss this notebook interactively in class. Our example problem for the day will be the Iris flower classification problem, and we will start by solving that problem using scikit-learn.
+We will run through and discuss this notebook interactively in class. Our example problem for the day will be the [Iris flower classification problem](https://en.wikipedia.org/wiki/Iris_flower_data_set), and we will start by solving that problem using scikit-learn.
 
 ## 5. Discussing how we might productionize the workflow
 
@@ -95,7 +95,20 @@ By the end of this discussion, we should decide on set of guidelines that should
 
 ## Resources
 
-Blah….
+Technical resources:
+
+- [Jupyter](http://jupyter.org/)
+- [Pandas](https://pandas.pydata.org/)
+- [scikit-learn](http://scikit-learn.org/stable/)
+- [Introduction to Neural Networks](http://blog.kaggle.com/2017/11/27/introduction-to-neural-networks/)
+
+Articles:
+
+- [A Guide to Building a High Functioning Data Science Department](http://multithreaded.stitchfix.com/blog/2016/03/16/engineers-shouldnt-write-etl/)  
+- [Data Science at the Speed of Hype](http://www.john-foreman.com/blog/surviving-data-science-at-the-speed-of-hype)   
+- [How we do Data Science at People Pattern](https://www.peoplepattern.com/post.html#!/how-we-do-data-science-at-people-pattern)  
+- [Doing Data Science at Twitter](https://medium.com/@rchang/my-two-year-journey-as-a-data-scientist-at-twitter-f0c13298aee6)
+- [Data Science Bill of Rights](http://www.pachyderm.io/dsbor.html)
 
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
