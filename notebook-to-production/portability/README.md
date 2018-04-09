@@ -11,9 +11,9 @@ This guide will walk you through:
 
 Bonus:
 
-1. [Push your Docker image to a registry](README.md#5-push-your-docker-image-to-a-registry)
+1. [Push your Docker image to a registry](README.md#1-push-your-docker-image-to-a-registry)
 2. [Docker-ize and run our training stage](#2-docker-ize-and-run-our-training-stage)
-3. [Docker-ize and run our inference stage](#2-docker-ize-and-run-our-inference-stage)
+3. [Docker-ize and run our inference stage](#3-docker-ize-and-run-our-inference-stage)
 
 It also includes a [list of resources](#resources) for those that want to dive in a little bit deeper.
 
