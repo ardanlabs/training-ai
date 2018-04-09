@@ -81,10 +81,10 @@ This template notebook has some comments near the bottom where you need to fill 
 
 ## Resources
 
-- Tensorflow
-- PyTorch
-- H2O.ai
-- Spark
+- [Tensorflow](https://www.tensorflow.org/)
+- [PyTorch](http://pytorch.org/)
+- [H2O.ai](https://www.h2o.ai/)
+- [Spark](https://spark.apache.org/mllib/)
 
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
