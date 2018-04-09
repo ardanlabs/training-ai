@@ -58,7 +58,7 @@ We will be working from the `full_ml_workflows` directory, so you can go ahead a
 $ cd ~/amld-reproducible-ml-workshop/full_ml_workflows/
 ```
 
-## 4. Create the input data repositories 
+## 3. Create the input data repositories 
 
 On the Pachyderm cluster running in your remote machine, we will need to create the two input data repositories (for our training data and input movie reviews).  To do this run:
 
@@ -76,7 +76,7 @@ reviews             2 seconds ago       0 B
 training            8 seconds ago       0 B
 ```
 
-## 5. Commit the training data set into pachyderm
+## 4. Commit the training data set into pachyderm
 
 We have our training data repository, but we haven't put our training data set into this repository yet.  You can get the training data set that we will be using via:
 
@@ -103,6 +103,10 @@ $ pachctl list-file training master
 NAME                   TYPE                SIZE                
 labeledTrainData.tsv   file                977 KiB
 ```
+
+## 5. Create the pre-processing pipeline
+
+Blah.
 
 ## 6. Create the training pipeline
 
