@@ -3,7 +3,7 @@
 This material is for intermediate-level data scientists, developers, data engineers, or researchers. Specifically, this material is for those who have some experience developing ML/AI models on sample data sets (maybe in Jupyter), but who might struggle to scale, deploy, and productionize their work. They need to understand which Python tools to use as they scale our workflows beyond the notebook, and they need to understand how to manage and distribute work on large data.
 
 - Instructor - Daniel Whitenack
-  - [website/blog](https://datadan.io)
+  - [website/blog](http://www.datadan.io/)
   - [twitter](https://twitter.com/dwhitena)
   - [github](https://github.com/dwhitena)
 - Prerequisties/getting started:
@@ -11,7 +11,7 @@ This material is for intermediate-level data scientists, developers, data engine
     - On a Mac or Linux machine, you should be able to ssh from a terminal (see these [Mac instructions](http://accc.uic.edu/answer/how-do-i-use-ssh-and-sftp-mac-os-x) and [Linux instructions](https://www.digitalocean.com/community/tutorials/how-to-use-ssh-to-connect-to-a-remote-server-in-ubuntu)).
     - On a Windows machine, you can either [install and use an ssh client (I recommend PuTTY)](https://www.putty.org/) or [use the WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
   - You will also need to work a bit at the command line. If you are new to the command line or need a refresher, look through [this quick tutorial](https://lifehacker.com/5633909/who-needs-a-mouse-learn-to-use-the-command-line-for-almost-anything).
-- If you need further help productionizing ML/AI workflows, want to bring this class to your company, or just have ML/AI related questions, [Ardan Labs](https://ardanlabs.com) is here to help! Reach out to the instructor using the links above or via the [Ardan Labs website](https://ardanlabs.com). 
+- If you need further help productionizing ML/AI workflows, want to bring this class to your company, or just have ML/AI related questions, [Ardan Labs](https://www.ardanlabs.com/) is here to help! Reach out to the instructor using the links above or via the [Ardan Labs website](https://www.ardanlabs.com/). 
 
 *Note: This material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class.*
 
