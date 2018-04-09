@@ -19,31 +19,31 @@ This material is for intermediate-level data scientists, developers, data engine
 
 This material introduces some common pain points and pitfalls that people fall into when trying to productionize data science work. Once your are done with this material, you will understand what the common pain points are and the guiding principles that will help us overcome them.    
 
-[Introduction to productioning ML/AI](introduction/README.md)
+[Introduction to productioning ML/AI](introduction)
 
 ## Using frameworks that scale
 
 This material introduces some methods and frameworks that will help our workflow scale beyond local sample data. Once you are done with this material, you will be exposed to some of the more scalable Python frameworks in the ecosystem (e.g., PyTorch) and have some experience refactoring modeling code for production.
 
-[Using frameworks that scale](#frameworks_that_scale)
+[Using frameworks that scale](frameworks_that_scale)
 
 ## Breaking our workflow up into pipeline stages
 
 This material walks you through breaking up a workflow, contained in a Jupyter notebook, into separate, scalable pipeline stages. Once you are done with this material, you will understand which portions of a ML/AI pipeline might benefit from being managed in isolation. You will also get some experience writing code for specific stages of a data pipeline (pre-processing, training, inference).
 
-[Breaking our workflow up into pipeline stages](#pipeline_stages)
+[Breaking our workflow up into pipeline stages](pipeline_stages)
 
 ## Making our pipeline stages portable
 
 This material introduces you to one way of making each stage of your AI pipeline portable, Docker. Once you are done with this material you will know how to port local Python code to cloud/on-prem instances via Docker. 
 
-[Making our pipeline stages portable](#portability)
+[Making our pipeline stages portable](portability)
 
 ## Deploying, scaling, and managing our pipeline
 
 This material introduces you to methods for orchestrating a multi-stage AI pipeline at scale. Once you are done with this material, you will understand various methods for deploying multi-stage pipelines along with their trade offs. You will also get hands-on experience deploying a multi-stage AI pipeline on a remote cluster.
 
-[Deploying, scaling, and managing our pipeline](#deploying_managing)
+[Deploying, scaling, and managing our pipeline](deploying_managing)
 
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
