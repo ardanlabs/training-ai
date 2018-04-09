@@ -1,14 +1,13 @@
-## Breaking our workflow up into pipeline stages
+# Breaking our workflow up into pipeline stages
 
 This material walks you through breaking up a workflow, contained in a Jupyter notebook, into separate, scalable pipeline stages. Once you are done with this material, you will understand which portions of a ML/AI pipeline might benefit from being managed in isolation. You will also get some experience writing code for specific stages of a data pipeline (pre-processing, training, inference).
 
 This guide will walk you through:
 
-1. [Discussing why we might want to split code into pipeline stages](#discussing-why-we-might-want-to-split-code)
-2. [Creating our pre-processing stage](#creating-our-pre-processing-stage)
-3. [Creating our training stage](#creating-our-training-stage)
-4. [Creating our inference stage](#creating-our-inference-stage)
-
+1. [Discussing why we might want to split code into pipeline stages](#1-discussing-why-we-might-want-to-split-code)
+2. [Creating our pre-processing stage](#2-creating-our-pre-processing-stage)
+3. [Creating our training stage](#3-creating-our-training-stage)
+4. [Creating our inference stage](#4-creating-our-inference-stage)
 
 It also includes a [list of resources](#resources) for those that want to dive in a little bit deeper.
 
@@ -76,7 +75,8 @@ You can start with [template2.py](exercise2/template2.py) and check [solution2.p
 
 ## Resources
 
-- Blah.
+- [Python command line arguments](https://docs.python.org/3.3/library/argparse.html)
+- [Saving/loading PyTorch models](http://pytorch.org/docs/0.3.1/notes/serialization.html#recommend-saving-models)
 
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

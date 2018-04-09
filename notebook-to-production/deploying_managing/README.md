@@ -17,9 +17,8 @@ This guide will walk you through:
 Bonus:
 
 10. [Parallelizing the inference](README.md#10-parallelize-the-inference)
-11. [Updating the model training](README.md#11-update-the-model-training)
-12. [Updating the training data set](README.md#12-update-the-training-data-set)
-13. [Examining pipeline provenance](README.md#13-examine-pipeline-provenance)
+11. [Updating the model or training data set](README.md#11-update-the-model-or-training-data-set)
+12. [Examining pipeline provenance](README.md#12-examine-pipeline-provenance)
 
 It also includes a [list of resources](#resources) for those that want to dive in a little bit deeper.
 
@@ -37,152 +36,165 @@ At the end of this discussion, we will have some new tools in our tool belt for 
 
 ## 2. Connect to your Pachyderm cluster  
 
-You should have been given an IP for a remote machine at the beginning of the workshop.  The remote machine already has a Pachyderm cluster running locally and all of the command line tools we will be needing throughout the workshop.  To log into the remote machine, open and terminal and:
-
-```
-$ ssh pachrat@<remote machine IP>
-```
-
-You will be asked for a password, which you should also be given during the workshop.  To verify that everything is running correctly on the machine, you should be able to run the following with the corresponding response:
+Your workshop instance should be connected to a running Pachyderm cluster. To check this, you should be able to run the following with the corresponding response:
 
 ```
 $ pachctl version
-COMPONENT           VERSION             
-pachctl             1.6.6           
-pachd               1.6.6
+COMPONENT           VERSION
+pachctl             1.7.0
+pachd               1.7.0
 ```
 
-We will be working from the `full_ml_workflows` directory, so you can go ahead and navigate there:
+We will be working from this directory, so you can go ahead and navigate there:
 
 ```
-$ cd ~/amld-reproducible-ml-workshop/full_ml_workflows/
+$ cd ~/training-ai/notebook-to-production/deploying_managing
 ```
 
-## 4. Create the input data repositories 
+## 3. Create the input data repositories 
 
-On the Pachyderm cluster running in your remote machine, we will need to create the two input data repositories (for our training data and input movie reviews).  To do this run:
+On the Pachyderm cluster running in your remote machine, we will need to create the two input data repositories (for our training data and input attributes).  To do this run:
 
 ```
 $ pachctl create-repo training
-$ pachctl create-repo reviews
+$ pachctl create-repo attributes
 ```
 
 As a sanity check, we can list out the current repos, and you should see the two repos you just created:
 
 ```
 $ pachctl list-repo
-NAME                CREATED             SIZE                
-reviews             2 seconds ago       0 B                 
-training            8 seconds ago       0 B
+NAME                CREATED             SIZE
+attributes          4 seconds ago       0B
+training            8 seconds ago       0B
 ```
 
-## 5. Commit the training data set into pachyderm
+## 4. Commit the training data set into pachyderm
 
-We have our training data repository, but we haven't put our training data set into this repository yet.  You can get the training data set that we will be using via:
-
-```
-$ wget https://s3.amazonaws.com/neon-workshop-data/labeledTrainData.tsv
-```
-
-This `labeledTrainData.tsv` file include 750 labeled movie reviews sampled from a larger IMDB data set.  Here we are using a sample for illustrative purposes (so our examples run a little faster in the workshop), but the entire data set can be obtained [here](https://www.kaggle.com/c/word2vec-nlp-tutorial/data).
-
-To get this data into Pachyderm, we run:
+We have our training data repository, but we haven't put our training data set into this repository yet. To get this data into Pachyderm, we run:
 
 ```
-$ pachctl put-file training master -c -f labeledTrainData.tsv
+$ pachctl put-file training master iris.csv -c -f data/iris.csv
 ```
 
 Then, you should be able to see the following:
 
 ```
 $ pachctl list-repo
-NAME                CREATED             SIZE                
-training            6 minutes ago       977 KiB             
-reviews             6 minutes ago       0 B                 
+NAME                CREATED              SIZE
+training            About a minute ago   4.308KiB
+attributes          About a minute ago   0B
 $ pachctl list-file training master
-NAME                   TYPE                SIZE                
-labeledTrainData.tsv   file                977 KiB
+NAME                TYPE                SIZE
+iris.csv            file                4.308KiB
+```
+
+## 5. Create the pre-processing pipeline
+
+Next, we can create the `pre_process` pipeline stage to pre-process the data in the training repository. To do this, we just need to provide Pachyderm with [a JSON pipeline specification](pre-process.json) that tells Pachyderm how to process the data.  
+
+Once you have `pre-process.json`, creating our `pre_process` pipeline is as easy as:
+
+```
+$ pachctl create-pipeline -f pre-process.json
+```
+
+Once the pipeline worker spins up (which you can watch via `kubectl get pods`), Pachyderm will automatically kick off a job to perform the pre-processing:
+
+```
+$ pachctl list-job
+ID                               OUTPUT COMMIT                                STARTED            DURATION RESTART PROGRESS  DL UL STATE
+da28d87632e44898be301d6baf13a5ee pre_process/cd94a0be5558492d9dbf2e5d973c8b0a About a minute ago -        0       0 + 0 / 1 0B 0B running
+```
+
+That job should complete pretty quickly:
+
+```
+$ pachctl list-job
+ID                               OUTPUT COMMIT                                STARTED            DURATION       RESTART PROGRESS  DL       UL       STATE
+da28d87632e44898be301d6baf13a5ee pre_process/cd94a0be5558492d9dbf2e5d973c8b0a About a minute ago About a minute 0       1 + 0 / 1 4.308KiB 10.82KiB success
+```
+
+Once it is complete, you will notice that you have a new data repository for the output from this stage of our pipeline, and that data repository has our pre-processed data:
+
+```
+$ pachctl list-file pre_process master
+NAME                TYPE                SIZE
+x_train.csv         file                9.968KiB
+y_train.csv         file                870B
 ```
 
 ## 6. Create the training pipeline
 
-Next, we can create the `model` pipeline stage to process the data in the training repository. To do this, we just need to provide Pachyderm with [a JSON pipeline specification](train.json) that tells Pachyderm how to process the data.  You can copy `train.json` from this repository or clone the whole repository to your remote machine.  After you have `infer.json`, creating our `model` training pipeline is as easy as:
+Similarly we can use [this JSON pipeline specification](train.json) to create our training pipeline:
 
 ```
 $ pachctl create-pipeline -f train.json
 ```
 
-Once the pipeline worker spins up, you will notice that Pachyderm has automatically kicked off a job to perform the model training:
+Again, this will automatically kick off a training job (after the pod initializes and pull the Docker image, which could take a few minutes). Pachyderm will also gather the output (in this case, the serialized model):
 
 ```
 $ pachctl list-job
-ID                                   OUTPUT COMMIT STARTED        DURATION RESTART PROGRESS  DL UL STATE
-df48056d-bbc2-4fc4-995e-3fae9dc1a659 model/-       11 seconds ago -        0       0 + 0 / 1 0B 0B running
-```
-
-This job should run for about 3-8 minutes.  In the mean time, we will address any questions that might have come up, help any users with issues they are experiences, and talk a bit more about ML workflows in Pachyderm.
-
-After your model has successfully been trained, you should see:
-
-```
+ID                               OUTPUT COMMIT                                STARTED       DURATION       RESTART PROGRESS  DL       UL       STATE
+6ad8bc882c4748d5a308cab6e32866f2 train/df90f50ea4814db8866004163bdcd126       5 minutes ago -              0       0 + 0 / 1 0B       0B       running
+da28d87632e44898be301d6baf13a5ee pre_process/cd94a0be5558492d9dbf2e5d973c8b0a 9 minutes ago About a minute 0       1 + 0 / 1 4.308KiB 10.82KiB success
 $ pachctl list-job
-ID                                   OUTPUT COMMIT                          STARTED        DURATION   RESTART PROGRESS  DL       UL       STATE
-df48056d-bbc2-4fc4-995e-3fae9dc1a659 model/7d5eae8ba55c4f04b5a97e117eb93310 25 seconds ago 14 seconds 0       1 + 0 / 1 977.6KiB 20.93MiB success
+ID                               OUTPUT COMMIT                                STARTED        DURATION       RESTART PROGRESS  DL       UL       STATE
+6ad8bc882c4748d5a308cab6e32866f2 train/df90f50ea4814db8866004163bdcd126       5 minutes ago  5 minutes      0       1 + 0 / 1 10.82KiB 787B     success
+da28d87632e44898be301d6baf13a5ee pre_process/cd94a0be5558492d9dbf2e5d973c8b0a 10 minutes ago About a minute 0       1 + 0 / 1 4.308KiB 10.82KiB success
 $ pachctl list-repo
-NAME                CREATED             SIZE                
-reviews             21 minutes ago      0 B            
-model               10 minutes ago      20.93 MiB           
-training            21 minutes ago      977 KiB             
-$ pachctl list-file model master
-NAME                TYPE                SIZE                
-imdb.p              file                20.54 MiB           
-imdb.vocab          file                393.2 KiB
+NAME                CREATED             SIZE
+train               6 minutes ago       787B
+pre_process         10 minutes ago      10.82KiB
+training            14 minutes ago      4.308KiB
+attributes          14 minutes ago      0B
+$ pachctl list-file train master
+NAME                TYPE                SIZE
+model.pt            file                787B
 ```
 
-## 7. Commit input reviews
+## 7. Commit input attributes
 
-Great! We now have a trained model that will infer the sentiment of movie reviews.  Let's commit some movie reviews into Pachyderm that we would like to run through the sentiment analysis.  We have a couple examples under [test](test).  Feel free to use these, find your own, or even write your own review.  To commit our samples (assuming you have cloned this repo on the remote machine), you can run:
+Great! We now have a trained model that will infer the species of Iris flowers.  Let's commit some example flower attributes into Pachyderm that we would like to run through the model.  We have a couple examples under [data](data).  Feel free to use these or create your own.  To commit our samples, you can run:
 
 ```
-$ cd test
-$ pachctl put-file reviews master -c -r -f .
-$ cd ..
+$ pachctl put-file attributes master test1.csv -c -f data/test1.csv
+$ pachctl put-file attributes master test2.csv -c -f data/test2.csv
 ```
 
 You should then see:
 
 ```
-$ pachctl list-file reviews master
-NAME                TYPE                SIZE                
-1.txt               file                770 B               
-2.txt               file                897 B
+$ pachctl list-file attributes master
+NAME                TYPE                SIZE
+test1.csv           file                96B
+test2.csv           file                64B
 ```
 
 ## 8. Create the inference pipeline
 
-We have another JSON blob, [infer.json](infer.json), that will tell Pachyderm how to perform the processing for the inference stage.  This is similar to our last JSON specification except, in this case, we have two input repositories (the `reviews` and the `model`) and we are using a different Docker image that contains `auto_inference.py`.  To create the inference stage, we simply run:
+We have another JSON blob, [infer.json](infer.json), that will tell Pachyderm how to perform the processing for the inference stage.  This is similar to our other JSON specifications except, in this case, we have two input repositories (the `attributes` and the `train`).  To create the inference stage, we simply run:
 
 ```
 $ pachctl create-pipeline -f infer.json
 ```
 
-This will immediately kick off an inference job, because we have committed unprocessed reviews into the `reviews` repo.  The results will then be versioned in a corresponding `inference` data repository:
+This will kick off an inference job, because we have committed unprocessed attributes into the `attributes` repo.  The results will then be versioned in a corresponding `inference` data repository:
 
 ```
 $ pachctl list-job
-ID                                   OUTPUT COMMIT                          STARTED                DURATION   RESTART PROGRESS  DL       UL       STATE
-b5e9e4ba-93ef-4cfa-841b-cff3cbf21529 inference/-                            Less than a second ago -          0       0 + 0 / 2 0B       0B       running
-df48056d-bbc2-4fc4-995e-3fae9dc1a659 model/7d5eae8ba55c4f04b5a97e117eb93310 4 minutes ago          14 seconds 0       1 + 0 / 1 977.6KiB 20.93MiB success
-$ pachctl list-job
-ID                                   OUTPUT COMMIT                              STARTED        DURATION   RESTART PROGRESS  DL       UL       STATE
-b5e9e4ba-93ef-4cfa-841b-cff3cbf21529 inference/fe985f6564da4edb9dd04892a911e7af 44 seconds ago 2 seconds  0       2 + 0 / 2 41.85MiB 70B      success
-df48056d-bbc2-4fc4-995e-3fae9dc1a659 model/7d5eae8ba55c4f04b5a97e117eb93310     5 minutes ago  14 seconds 0       1 + 0 / 1 977.6KiB 20.93MiB success
+ID                               OUTPUT COMMIT                                STARTED        DURATION       RESTART PROGRESS  DL       UL       STATE
+21306064197849008785bc80808421b7 inference/a9075053dba0442b954af6c4636894d8   18 seconds ago 14 seconds     0       2 + 0 / 2 1.693KiB 139B     success
+6ad8bc882c4748d5a308cab6e32866f2 train/df90f50ea4814db8866004163bdcd126       10 minutes ago 5 minutes      0       1 + 0 / 1 10.82KiB 787B     success
+da28d87632e44898be301d6baf13a5ee pre_process/cd94a0be5558492d9dbf2e5d973c8b0a 14 minutes ago About a minute 0       1 + 0 / 1 4.308KiB 10.82KiB success
 $ pachctl list-repo
-NAME                CREATED              SIZE                
-inference           About a minute ago   70 B                
-reviews             2 hours ago          1.628 KiB           
-model               About an hour ago    20.93 MiB           
-training            2 hours ago          977 KiB
+NAME                CREATED             SIZE
+inference           47 seconds ago      139B
+attributes          19 minutes ago      160B
+pre_process         15 minutes ago      10.82KiB
+train               11 minutes ago      787B
+training            19 minutes ago      4.308KiB
 ```
 
 ## 9. Examine the results
@@ -190,17 +202,18 @@ training            2 hours ago          977 KiB
 We have created results from the inference, but how do we examine those results?  There are multiple ways, but an easy way is to just "get" the specific files out of Pachyderm's data versioning:
 
 ```
-$ pachctl list-file inference master
-NAME                TYPE                SIZE                
-1.txt               file                35 B                
-2.txt               file                35 B                
-$ pachctl get-file inference master 1.txt
-Pred - [[ 0.50981182  0.49018815]]
-$ pachctl get-file inference master 2.txt
-Pred - [[ 0.53010267  0.46989727]]
+$ $ pachctl list-file inference master
+NAME                TYPE                SIZE
+test1.csv           file                85B
+test2.csv           file                54B
+$ pachctl get-file inference master test1.csv
+Iris-versicolor
+Iris-virginica
+Iris-virginica
+Iris-virginica
+Iris-setosa
+Iris-setosa
 ```
-
-Here we can see that each result file contains two probabilities corresponding to postive and negative sentiment, respectively.
 
 ## Bonus exercises
 
@@ -208,174 +221,101 @@ You may not get to all of these bonus exercises during the workshop time, but yo
 
 ### 10. Parallelize the inference
 
-You may have noticed that our pipeline specs included a `parallelism_spec` field.  This tells Pachyderm how to parallelize a particular pipeline stage.  Let's say that in production we start receiving a huge number of movie reviews, and we need to keep up with our sentiment analysis.  In particular, let's say we want to spin up 10 inference workers to perform sentiment analysis in parallel.
+You may have noticed that our pipeline specs included a `parallelism_spec` field.  This tells Pachyderm how to parallelize a particular pipeline stage.  Let's say that in production we start receiving a large number of flower attributes, and we need to keep up with our inference.  In particular, let's say we want to spin up 3 inference workers to perform inference in parallel.
 
 This actually doesn't require any change to our code.  We can simply change our `parallelism_spec` to:
 
 ```
   "parallelism_spec": {
-    "constant": "10"
+    "constant": "3"
   },
 ```
 
-Pachyderm will then spin up 10 inference workers, each running our same `auto_inference.py` script, to perform inference in parallel.  This can be confirmed by updating our pipeline and then examining the cluster:
+Pachyderm will then spin up 3 inference workers, each running our same `infer.py` script, to perform inference in parallel.  This can be confirmed by updating our pipeline and then examining the cluster:
 
 ```
 $ vim infer.json 
-$ pachctl update-pipeline -f infer.json 
-  AGE
-dash-64bf867d6b-tmql2         2/2       Running           0          35m
-etcd-7dbb489f44-dhjrf         1/1       Running           0          35m
-pachd-9f4654f69-7fqzz         1/1       Running           0          35m
-pipeline-inference-v2-289h8   2/2       Running           0          16s
-pipeline-inference-v2-8t6dt   0/2       PodInitializing   0          16s
-pipeline-inference-v2-d9f7p   0/2       Init:0/1          0          16s
-pipeline-inference-v2-dsw4h   0/2       Init:0/1          0          16s
-pipeline-inference-v2-gpbt8   0/2       Init:0/1          0          16s
-pipeline-inference-v2-gwbq2   2/2       Running           0          16s
-pipeline-inference-v2-htd44   0/2       Init:0/1          0          16s
-pipeline-inference-v2-jg42j   0/2       PodInitializing   0          16s
-pipeline-inference-v2-pshs9   0/2       PodInitializing   0          16s
-pipeline-inference-v2-xntsr   0/2       Init:0/1          0          16s
-pipeline-model-v1-src4q       2/2       Running           0          8m
+$ pachctl update-pipeline -f infer.json
 $ kubectl get pods
-NAME                          READY     STATUS    RESTARTS   AGE
-dash-64bf867d6b-tmql2         2/2       Running   0          36m
-etcd-7dbb489f44-dhjrf         1/1       Running   0          36m
-pachd-9f4654f69-7fqzz         1/1       Running   0          36m
-pipeline-inference-v2-289h8   2/2       Running   0          30s
-pipeline-inference-v2-8t6dt   2/2       Running   0          30s
-pipeline-inference-v2-d9f7p   2/2       Running   0          30s
-pipeline-inference-v2-dsw4h   2/2       Running   0          30s
-pipeline-inference-v2-gpbt8   2/2       Running   0          30s
-pipeline-inference-v2-gwbq2   2/2       Running   0          30s
-pipeline-inference-v2-htd44   2/2       Running   0          30s
-pipeline-inference-v2-jg42j   2/2       Running   0          30s
-pipeline-inference-v2-pshs9   2/2       Running   0          30s
-pipeline-inference-v2-xntsr   2/2       Running   0          30s
-pipeline-model-v1-src4q       2/2       Running   0          8m
+NAME                            READY     STATUS            RESTARTS   AGE
+dash-67586ccc67-4ms9s           2/2       Running           0          18h
+etcd-7dbb489f44-s9tfz           1/1       Running           0          18h
+pachd-688c7bbbc6-w5kwh          1/1       Running           0          18h
+pipeline-inference-v2-4bzrj     0/2       PodInitializing   0          3s
+pipeline-inference-v2-576r2     0/2       Init:0/1          0          3s
+pipeline-inference-v2-5khqk     0/2       Init:0/1          0          3s
+pipeline-pre-process-v1-vfv2n   2/2       Running           0          18m
+pipeline-train-v1-29k4j         2/2       Running           0          14m
+$ kubectl get pods
+NAME                            READY     STATUS    RESTARTS   AGE
+dash-67586ccc67-4ms9s           2/2       Running   0          18h
+etcd-7dbb489f44-s9tfz           1/1       Running   0          18h
+pachd-688c7bbbc6-w5kwh          1/1       Running   0          18h
+pipeline-inference-v2-4bzrj     2/2       Running   0          30s
+pipeline-inference-v2-576r2     2/2       Running   0          30s
+pipeline-inference-v2-5khqk     2/2       Running   0          30s
+pipeline-pre-process-v1-vfv2n   2/2       Running   0          18m
+pipeline-train-v1-29k4j         2/2       Running   0          14m
 ```
 
-### 11. Update the model training
+### 11. Update the model or training data set
 
-**Note** - This exercise increases the training time of our model, so you might be waiting for 5+ minutes for the model to re-train (maybe up to 10-15 minutes).  If you don't want to wait for this amount of time during the workshop, you could try step 12, which will take less time.
-
-You might have noticed that we only used one "epoch" in our model training the first time around.  This is probably not enough in general.  As such, you can change this to two, for example, by modifying `train.json`:
+Let's say that one or more observations in our training data set were corrupt or unwanted.  Thus, we want to update our training data set.  To simulate this, go ahead and open up `iris.csv` (e.g., with `vim`) and remove a couple of the reviews (i.e., the non-header rows).  Then, let's replace our training set:
 
 ```
-    "cmd": [ 
-	"python", 
-	"examples/imdb/train.py", 
-	"-f", 
-	"/pfs/training/labeledTrainData.tsv", 
-	"-e", 
-	"2", 
-	"-eval", 
-	"1", 
-	"-s", 
-	"/pfs/out/imdb.p", 
-	"--vocab_file", 
-	"/pfs/out/imdb.vocab" 
-    ]
-```
-
-Once you modify the spec, you can update the pipeline by running:
-
-```
-$ pachctl update-pipeline -f train.json --reprocess
-```
-
-Pachyderm will then automatically kick off a new job to retrain our model with the updated parameters:
-
-```
-$ pachctl list-job
-ID                                   OUTPUT COMMIT                              STARTED       DURATION   RESTART PROGRESS  DL       UL       STATE
-1f62533a-6fe3-4a99-8ec7-e71bebaf0563 model/-                                    2 seconds ago -          0       0 + 0 / 1 0B       0B       running
-b5e9e4ba-93ef-4cfa-841b-cff3cbf21529 inference/fe985f6564da4edb9dd04892a911e7af 4 minutes ago 2 seconds  0       2 + 0 / 2 41.85MiB 70B      success
-df48056d-bbc2-4fc4-995e-3fae9dc1a659 model/7d5eae8ba55c4f04b5a97e117eb93310     9 minutes ago 14 seconds 0       1 + 0 / 1 977.6KiB 20.93MiB success
-```
-
-Not only that, once the model is retrained, Pachyderm see the new model and automatically update our inferences with the latest version of the model.
-
-```
-$ pachctl list-job
-ID                                   OUTPUT COMMIT                              STARTED        DURATION   RESTART PROGRESS  DL       UL       STATE
-5b227d47-c801-4fec-a0c5-8f06732ff4a9 inference/f828b13e7fd54e149101fed150e58d1e 43 seconds ago 1 second   0       2 + 0 / 2 41.85MiB 68B      success
-1f62533a-6fe3-4a99-8ec7-e71bebaf0563 model/92c33d731e2b4fc5ab0c6f91e13cce4a     56 seconds ago 3 minutes  0       1 + 0 / 1 977.6KiB 20.93MiB success
-b5e9e4ba-93ef-4cfa-841b-cff3cbf21529 inference/fe985f6564da4edb9dd04892a911e7af 5 minutes ago  2 seconds  0       2 + 0 / 2 41.85MiB 70B      success
-df48056d-bbc2-4fc4-995e-3fae9dc1a659 model/7d5eae8ba55c4f04b5a97e117eb93310     10 minutes ago 14 seconds 0       1 + 0 / 1 977.6KiB 20.93MiB success
-```
-
-### 12. Update the training data set
-
-Let's say that one or more observations in our training data set were corrupt or unwanted.  Thus, we want to update our training data set.  To simulate this, go ahead and open up `labeledTrainData.tsv` (e.g., with `vim`) and remove a couple of the reviews (i.e., the non-header rows).  Then, let's replace our training set:
-
-```
-$ vim labeledTrainData.tsv
-$ pachctl put-file training master -c -o -f labeledTrainData.tsv
+$ vim data/iris.csv
+$ pachctl put-file training master iris.csv -c -o -f data/iris.csv
 ```
 
 Immediately, Pachyderm "knows" that the data has been updated, and it starts a new job to update the model and inferences:
 
 ```
 $ pachctl list-job
-ID                                   OUTPUT COMMIT                              STARTED        DURATION   RESTART PROGRESS  DL       UL       STATE
-491fa992-3070-455e-b371-b5ab96065be3 model/-                                    8 seconds ago  -          0       0 + 0 / 1 0B       0B       running
-5b227d47-c801-4fec-a0c5-8f06732ff4a9 inference/f828b13e7fd54e149101fed150e58d1e 3 minutes ago  1 second   0       2 + 0 / 2 41.85MiB 68B      success
-1f62533a-6fe3-4a99-8ec7-e71bebaf0563 model/92c33d731e2b4fc5ab0c6f91e13cce4a     3 minutes ago  12 seconds 0       1 + 0 / 1 977.6KiB 20.93MiB success
-b5e9e4ba-93ef-4cfa-841b-cff3cbf21529 inference/fe985f6564da4edb9dd04892a911e7af 8 minutes ago  2 seconds  0       2 + 0 / 2 41.85MiB 70B      success
-df48056d-bbc2-4fc4-995e-3fae9dc1a659 model/7d5eae8ba55c4f04b5a97e117eb93310     12 minutes ago 14 seconds 0       1 + 0 / 1 977.6KiB 20.93MiB success
+ID                               OUTPUT COMMIT                                STARTED        DURATION       RESTART PROGRESS  DL       UL       STATE
+682e9e8ff7ce4e8cb5150ac8518d17cf inference/79035d06cea24b4bbff76503a0019cc8   5 seconds ago  -              0       0 + 0 / 0 0B       0B       starting
+1cd3967dfce64127b8d1a3313082a604 train/f28fd55c80364260af152a10258b406d       5 seconds ago  -              0       0 + 0 / 0 0B       0B       starting
+2da4cda4cbf44f1da0e5152d824ad64d pre_process/7d05fa2c3c704b52b8d3fa24372e9813 5 seconds ago  -              0       0 + 0 / 1 0B       0B       running
+e9ca0c7766754ed1b72a986233cf5127 inference/9e223462b5844a3a886b3aebf7566fea   2 minutes ago  7 seconds      0       0 + 2 / 2 0B       0B       success
+21306064197849008785bc80808421b7 inference/a9075053dba0442b954af6c4636894d8   6 minutes ago  14 seconds     0       2 + 0 / 2 1.693KiB 139B     success
+6ad8bc882c4748d5a308cab6e32866f2 train/df90f50ea4814db8866004163bdcd126       16 minutes ago 5 minutes      0       1 + 0 / 1 10.82KiB 787B     success
+da28d87632e44898be301d6baf13a5ee pre_process/cd94a0be5558492d9dbf2e5d973c8b0a 20 minutes ago About a minute 0       1 + 0 / 1 4.308KiB 10.82KiB success
 ```
 
-Not only that, when the new model has been produced, Pachyderm "knows" that there is a new model and updates the previously inferred sentiments:
+### 12. Examine pipeline provenance
 
-```
-$ pachctl list-job
-ID                                   OUTPUT COMMIT                              STARTED            DURATION   RESTART PROGRESS  DL       UL       STATE
-8b8fa33d-cbb3-40a6-93b5-6f59407714fb inference/39b2a5d9fe874c0f95b5473af14485a5 About a minute ago 1 second   0       2 + 0 / 2 41.85MiB 70B      success
-491fa992-3070-455e-b371-b5ab96065be3 model/960d0e24a836448fae076cf6f2c98e40     About a minute ago 12 seconds 0       1 + 0 / 1 974.3KiB 20.92MiB success
-5b227d47-c801-4fec-a0c5-8f06732ff4a9 inference/f828b13e7fd54e149101fed150e58d1e 4 minutes ago      1 second   0       2 + 0 / 2 41.85MiB 68B      success
-1f62533a-6fe3-4a99-8ec7-e71bebaf0563 model/92c33d731e2b4fc5ab0c6f91e13cce4a     4 minutes ago      12 seconds 0       1 + 0 / 1 977.6KiB 20.93MiB success
-b5e9e4ba-93ef-4cfa-841b-cff3cbf21529 inference/fe985f6564da4edb9dd04892a911e7af 9 minutes ago      2 seconds  0       2 + 0 / 2 41.85MiB 70B      success
-df48056d-bbc2-4fc4-995e-3fae9dc1a659 model/7d5eae8ba55c4f04b5a97e117eb93310     13 minutes ago     14 seconds 0       1 + 0 / 1 977.6KiB 20.93MiB success
-```
-
-### 13. Examine pipeline provenance
-
-Let's say that we have updated our model or training set in one of the above scenarios (step 11 or 12).  Now we have multiple inferences that were made with different models and/or training data sets.  How can we know which results came from which specific models and/or training data sets?  This is called "provenance," and Pachyderm gives it to you out of the box.  
+Let's say that we have updated our model and/or training set a bunch of times.  Now we have multiple inferences that were made with different models and/or training data sets.  How can we know which results came from which specific models and/or training data sets?  This is called "provenance," and Pachyderm gives it to you out of the box.  
 
 Suppose we have run the following jobs:
 
 ```
 $ pachctl list-job
-ID                                   OUTPUT COMMIT                              STARTED            DURATION   RESTART PROGRESS  DL       UL       STATE
-8b8fa33d-cbb3-40a6-93b5-6f59407714fb inference/39b2a5d9fe874c0f95b5473af14485a5 About a minute ago 1 second   0       2 + 0 / 2 41.85MiB 70B      success
-491fa992-3070-455e-b371-b5ab96065be3 model/960d0e24a836448fae076cf6f2c98e40     About a minute ago 12 seconds 0       1 + 0 / 1 974.3KiB 20.92MiB success
-5b227d47-c801-4fec-a0c5-8f06732ff4a9 inference/f828b13e7fd54e149101fed150e58d1e 4 minutes ago      1 second   0       2 + 0 / 2 41.85MiB 68B      success
-1f62533a-6fe3-4a99-8ec7-e71bebaf0563 model/92c33d731e2b4fc5ab0c6f91e13cce4a     4 minutes ago      12 seconds 0       1 + 0 / 1 977.6KiB 20.93MiB success
-b5e9e4ba-93ef-4cfa-841b-cff3cbf21529 inference/fe985f6564da4edb9dd04892a911e7af 9 minutes ago      2 seconds  0       2 + 0 / 2 41.85MiB 70B      success
-df48056d-bbc2-4fc4-995e-3fae9dc1a659 model/7d5eae8ba55c4f04b5a97e117eb93310     13 minutes ago     14 seconds 0       1 + 0 / 1 977.6KiB 20.93MiB success
+ID                               OUTPUT COMMIT                                STARTED            DURATION       RESTART PROGRESS  DL       UL       STATE
+682e9e8ff7ce4e8cb5150ac8518d17cf inference/79035d06cea24b4bbff76503a0019cc8   About a minute ago 37 seconds     0       2 + 0 / 2 1.693KiB 139B     success
+1cd3967dfce64127b8d1a3313082a604 train/f28fd55c80364260af152a10258b406d       About a minute ago 32 seconds     0       1 + 0 / 1 10.52KiB 787B     success
+2da4cda4cbf44f1da0e5152d824ad64d pre_process/7d05fa2c3c704b52b8d3fa24372e9813 About a minute ago 4 seconds      0       1 + 0 / 1 4.198KiB 10.52KiB success
+e9ca0c7766754ed1b72a986233cf5127 inference/9e223462b5844a3a886b3aebf7566fea   3 minutes ago      7 seconds      0       0 + 2 / 2 0B       0B       success
+21306064197849008785bc80808421b7 inference/a9075053dba0442b954af6c4636894d8   7 minutes ago      14 seconds     0       2 + 0 / 2 1.693KiB 139B     success
+6ad8bc882c4748d5a308cab6e32866f2 train/df90f50ea4814db8866004163bdcd126       17 minutes ago     5 minutes      0       1 + 0 / 1 10.82KiB 787B     success
+da28d87632e44898be301d6baf13a5ee pre_process/cd94a0be5558492d9dbf2e5d973c8b0a 21 minutes ago     About a minute 0       1 + 0 / 1 4.308KiB 10.82KiB success
 ```
 
-If we want to know which model and training data set was used for the latest inference, commit id `39b2a5d9fe874c0f95b5473af14485a5`, we just need to inspect the particular commit:
+If we want to know which model and training data set was used for the latest inference, commit id `a9075053dba0442b954af6c4636894d8`, we just need to inspect the particular commit:
 
 ```
-$ pachctl inspect-commit inference 39b2a5d9fe874c0f95b5473af14485a5
-Commit: inference/39b2a5d9fe874c0f95b5473af14485a5
-Parent: f828b13e7fd54e149101fed150e58d1e
-Started: 2 minutes ago
-Finished: 2 minutes ago
-Size: 70B
-Provenance:  training/081d10dc1d9346b5872361e0f8d5ecb9  model/960d0e24a836448fae076cf6f2c98e40  reviews/8847b746d8ee441aa69a20fcfae6db2b
+$ pachctl inspect-commit inference a9075053dba0442b954af6c4636894d8
+Commit: inference/a9075053dba0442b954af6c4636894d8
+Started: 8 minutes ago
+Finished: 7 minutes ago
+Size: 139B
+Provenance:  attributes/4065496d3e144ccbadc7a27cbbe11033  pre_process/cd94a0be5558492d9dbf2e5d973c8b0a  train/df90f50ea4814db8866004163bdcd126  training/a9de1b71ead94c45aae64ec4e0e78226  __spec__/d514f9593f7241049b912ffb0edcdfa2  __spec__/2fd75d6eac6b4a7cbb8978cd39036340  __spec__/d177c5a636c844859e7bf4602026e70f
 ```
 
-The `Provenance` tells us exactly which model and training set was used (along with which commit to reviews triggered the sentiment analysis).  For example, if we wanted to see the exact model used, we would just need to reference commit `960d0e24a836448fae076cf6f2c98e40` to the `model` repo:
+The `Provenance` tells us exactly which model and training set was used (along with which commit to reviews triggered the sentiment analysis).  For example, if we wanted to see the exact model used, we would just need to reference commit `960d0e24a836448fae076cf6f2c98e40` to the `train` repo:
 
 ```
-$ pachctl list-file model 960d0e24a836448fae076cf6f2c98e40
-NAME                TYPE                SIZE                
-imdb.p              file                20.54 MiB           
-imdb.vocab          file                392.6 KiB
+$ pachctl list-file train df90f50ea4814db8866004163bdcd126
+NAME                TYPE                SIZE
+model.pt            file                787B
 ```
 
 We could get this model to examine it, rerun it, revert to a different model, etc.
@@ -388,3 +328,8 @@ Pachyderm:
 - Follow [Pachyderm on Twitter](https://twitter.com/pachydermIO), 
 - Find [Pachyderm on GitHub](https://github.com/pachyderm/pachyderm), and
 - [Spin up Pachyderm](http://docs.pachyderm.io/en/latest/getting_started/getting_started.html) in just a few commands to try this and [other examples](http://docs.pachyderm.io/en/latest/examples/readme.html) locally.
+
+Kubernetes:
+
+- [What is Kubernetes](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/)
+- [Tensorflow + GPUs on k8s](https://youtu.be/OZSA5hmkb0o)
