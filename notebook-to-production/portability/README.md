@@ -62,7 +62,7 @@ Thus, a common workflow when building a Docker-ized application is as follows:
 3. Upload the image to a registry
 4. Deploy a Docker container, based on the image from the registry, to a cloud instance or on premise node
 
-## 3. Docker-ize an example Python application
+## 3. Docker-ize our pre-processing stage
 
 Let's say that we want to "Docker-ize" [example1/pre_process.py](example1/pre_process.py). This means that we want to create a *Docker image*. The Docker image will include our application and any library/package dependencies. Once built, we can then run this Docker image as a *Docker container* on any machine that is running the *Docker engine*. Regardless of the host OS or local configuration, this will buy us predictable behavior and portability.
 
