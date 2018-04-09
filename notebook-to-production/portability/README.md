@@ -90,7 +90,7 @@ $ sudo docker run -it pre-process /bin/bash
 
 This will open up an interactive bash shell in the container. You can explore the container a bit and try running the code (`pre_process.py`) that we added to the image.
 
-*Note* - There are a bunch of ways to run Docker images. We will discuss some of these in class. However, for a more in depth intro check out [this codelab]().
+*Note* - There are a bunch of ways to run Docker images. We will discuss some of these in class. However, for a more in depth intro check out [this codelab](https://github.com/dwhitena/qcon-ai-docker-workshop).
 
 ## Bonus exercises
 
@@ -136,3 +136,4 @@ Similar to the pre-processing stage, we include a Dockerfile for `infer.py` in [
 
 - [Getting started with Docker](https://docs.docker.com/get-started/)
 - [Dockerfile reference](https://docs.docker.com/engine/reference/builder/)
+- [Docker-izing your AI applications, CodeLab](https://github.com/dwhitena/qcon-ai-docker-workshop)
