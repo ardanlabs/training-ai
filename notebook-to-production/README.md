@@ -2,6 +2,7 @@
 
 This material is for intermediate-level data scientists, developers, data engineers, or researchers. Specifically, this material is for those who have some experience developing ML/AI models on sample data sets (maybe in Jupyter), but who might struggle to scale, deploy, and productionize their work. They need to understand which Python tools to use as they scale our workflows beyond the notebook, and they need to understand how to manage and distribute work on large data.
 
+- [Slides from the class](https://docs.google.com/presentation/d/1vhINmKo-gIoDU1vVDqpg51auZpPkFV0h_X-ukdyYsFc/edit?usp=sharing)
 - Instructor - Daniel Whitenack
   - [website/blog](http://www.datadan.io/)
   - [twitter](https://twitter.com/dwhitena)
