@@ -1,13 +1,12 @@
-## Introduction to productionizing ML/AI
+# Using Frameworks that Scale
 
 This material introduces some methods and frameworks that will help our workflow scale beyond local sample data. Once you are done with this material, you will be exposed to some of the more scalable Python frameworks in the ecosystem (e.g., PyTorch) and have some experience refactoring modeling code for production.
 
 This guide will walk you through:
 
-1. [Discussing scalable Python frameworks for ML/AI](#discussing-scalable-python-frameworks)
-2. [Refactoring model training](#refactoring-model-training)
-3. [Refactoring model inference](#refactoring-model-inference)
-
+1. [Discussing scalable Python frameworks for ML/AI](#1-discussing-scalable-python-frameworks)
+2. [Refactoring model training](#2-refactoring-model-training)
+3. [Refactoring model inference](#3-refactoring-model-inference)
 
 It also includes a [list of resources](#resources) for those that want to dive in a little bit deeper.
 
