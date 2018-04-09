@@ -46,10 +46,12 @@ net = Net(input_size, hidden_size, num_classes)
 criterion = nn.BCEWithLogitsLoss()
 optimizer = torch.optim.SGD(net.parameters(), lr=learning_rate)
 
+# X and y variables
+X_tensor = Variable(torch.from_numpy(X.as_matrix()).float())
+Y_tensor = Variable(torch.from_numpy(y.as_matrix()).float())
+
 # train the model
 for epoch in range(num_epoch):
-    X_tensor = Variable(torch.from_numpy(X.as_matrix()).float())
-    Y_tensor = Variable(torch.from_numpy(y.as_matrix()).float())
 
     #feedforward - backprop
     optimizer.zero_grad()

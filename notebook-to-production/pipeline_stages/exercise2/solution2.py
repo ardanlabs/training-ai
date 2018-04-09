@@ -15,7 +15,7 @@ parser.add_argument('infile', type=str, help='Input file containing the input fe
 parser.add_argument('outdir', type=str, help='Output directory for the inferences')
 args = parser.parse_args()
 
-# read in the pre-processed X, y data
+# read in the input features
 cols = ['f1', 'f2', 'f3', 'f4']
 infer_data = pd.read_csv(args.infile, names=cols)
 infer_data = MinMaxScaler().fit_transform(infer_data)
