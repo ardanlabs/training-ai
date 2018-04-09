@@ -1,14 +1,14 @@
-## Introduction to productionizing ML/AI
+# Introduction to productionizing ML/AI
 
 This material introduces some common pain points and pitfalls that people fall into when trying to productionize data science work. Once your are done with this material, you will understand what the common pain points are and the guiding principles that will help us overcome them.
 
 Much of this section of the course is meant to be a discussion. That discussion will be centered around an example AI workflow in a Jupyter notebook. This guide will walk you through:
 
-1. [Connecting to your workshop instance](#connecting-to-your-workshop-instance)
-2. [Cloning the workshop material](#cloning-the-workshop-material)
-3. [Starting Jupyter](#starting-jupyter)
-4. [Running the example python workflow](#running-the-example-python-workflow)
-5. [Discussing how we might productionize the workflow](#discussing-how-we-might-productionize-the-workflow)
+1. [Connecting to your workshop instance](#1-connecting-to-your-workshop-instance)
+2. [Cloning the workshop material](#2-cloning-the-workshop-material)
+3. [Starting Jupyter](#3-starting-jupyter)
+4. [Running the example python workflow](#4-running-the-example-python-workflow)
+5. [Discussing how we might productionize the workflow](#5-discussing-how-we-might-productionize-the-workflow)
 
 
 It also includes a [list of resources](#resources) for those that want to dive in a little bit deeper.
