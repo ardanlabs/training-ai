@@ -143,7 +143,7 @@ imdb.p              file                20.54 MiB
 imdb.vocab          file                393.2 KiB
 ```
 
-## 7. Commit input reviews
+## 7. Commit input attributes
 
 Great! We now have a trained model that will infer the sentiment of movie reviews.  Let's commit some movie reviews into Pachyderm that we would like to run through the sentiment analysis.  We have a couple examples under [test](test).  Feel free to use these, find your own, or even write your own review.  To commit our samples (assuming you have cloned this repo on the remote machine), you can run:
 
