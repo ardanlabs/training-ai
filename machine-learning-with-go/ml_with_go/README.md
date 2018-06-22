@@ -1,8 +1,8 @@
-# ML and the ML workflow
+# ML with Go
 
-This material introduces the basics of machine learning and the workflow that should be used when developing and utilizing machine learning models. Once you are done with this material, you will be exposed to the most commonly used machine learning techniques and you will understand the significance of training, evaluation, validation, and inference.
+This material introduces some Go packages and frameworks that will help us implement ML in Go. Once you are done with this material, you will know where to look to find ML-related packages for Go, have some hands-on experience working with these packages, and understand the utility of Go for ML.
 
-Much of this section of the course is meant to be a discussion. That discussion will be centered around a set of notes that you can take with you as reference after the class. This guide will walk you through:
+This section is meant to be a survey of Go packages and frameworks related to ML along with some hands-on exercises using those packages and frameworks. We will be referring back to the ML workflow introduced in [the last section](../ml_workflow) as necessary.  This guide will walk you through:
 
 1. [blah](#1-blah)
 2. [blah](#2-blah)
@@ -24,7 +24,7 @@ Coming soon...
 
 ## Resources
 
-- [Machine Learning Crash Course from Google](https://developers.google.com/machine-learning/crash-course/)  
+- [Machine Learning with Go](https://www.packtpub.com/big-data-and-business-intelligence/machine-learning-go)  
 
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
