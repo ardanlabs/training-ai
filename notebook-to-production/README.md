@@ -1,6 +1,6 @@
 # Python-based workflows - from notebook to production
 
-This material is for intermediate-level data scientists, developers, data engineers, or researchers. Specifically, this material is for those who have some experience developing ML/AI models on sample data sets (maybe in Jupyter), but who might struggle to scale, deploy, and productionize their work. They need to understand which Python tools to use as they scale our workflows beyond the notebook, and they need to understand how to manage and distribute work on large data.
+This material is for intermediate-level data scientists, developers, data engineers, or researchers. Specifically, this material is for those who have some interest in or experience with developing ML/AI models on sample data sets (maybe in Jupyter), but who might struggle to understand the full ML/AI workflow and scale, deploy, and productionize their work. They need to understand which Python tools to use as they scale our workflows beyond the notebook, and they need to understand how to manage and distribute work on large data.
 
 - [Slides from the class](https://docs.google.com/presentation/d/1vhINmKo-gIoDU1vVDqpg51auZpPkFV0h_X-ukdyYsFc/edit?usp=sharing)
 - Instructor - Daniel Whitenack
@@ -16,11 +16,17 @@ This material is for intermediate-level data scientists, developers, data engine
 
 *Note: This material has been designed to be taught in a classroom environment. The code is well commented but missing some of the contextual concepts and ideas that will be covered in class.*
 
-## Intro to productionizing ML/AI 
+## Introduction to common Python tooling
 
-This material introduces some common pain points and pitfalls that people fall into when trying to productionize data science work. Once your are done with this material, you will understand what the common pain points are and the guiding principles that will help us overcome them.    
+This material introduces some of the commonly used Python tooling for data science and ML/AI. Once you are done with this material, you will understand what sets of tools are used in producing AI models, and how data scientists often interact with those tools.
 
-[Introduction to productioning ML/AI](introduction)
+[Introduction to common Python tooling](introduction)
+
+## Productionizing ML/AI 
+
+This material introduces some pain points and pitfalls that people fall into when trying to productionize data science work. Once you are done with this material, you will understand what the common pain points are and the guiding principles that will help us overcome them.    
+
+[Productioning ML/AI](productionizing)
 
 ## Using frameworks that scale
 

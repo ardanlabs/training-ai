@@ -1,14 +1,14 @@
 # Introduction to productionizing ML/AI
 
-This material introduces some common pain points and pitfalls that people fall into when trying to productionize data science work. Once your are done with this material, you will understand what the common pain points are and the guiding principles that will help us overcome them.
+This material introduces some of the commonly used Python tooling for data science and ML/AI. Once you are done with this material, you will understand what sets of tools are used in producing AI models, and how data scientists often interact with those tools.
 
-Much of this section of the course is meant to be a discussion. That discussion will be centered around an example AI workflow in a Jupyter notebook. This guide will walk you through:
+You can follow this guide as we work through the material in class. Most of the commands/instructions that will be given in class are repeated here, so you can follow along and/or catch up when needed. Specifically, this guide will walk you through:
 
 1. [Connecting to your workshop instance](#1-connecting-to-your-workshop-instance)
 2. [Cloning the workshop material](#2-cloning-the-workshop-material)
 3. [Starting Jupyter](#3-starting-jupyter)
-4. [Running the example python workflow](#4-running-the-example-python-workflow)
-5. [Discussing how we might productionize the workflow](#5-discussing-how-we-might-productionize-the-workflow)
+4. [blah](#4-running-the-example-python-workflow)
+5. [blah](#5-discussing-how-we-might-productionize-the-workflow)
 
 
 It also includes a [list of resources](#resources) for those that want to dive in a little bit deeper.
@@ -56,7 +56,7 @@ deploying_managing  frameworks_that_scale  introduction  pipeline_stages  portab
 
 ## 3. Starting Jupyter
 
-Now, we are going to start our journey to production with a familiar Python workflow contained in a Jupyter notebook. Navigate to the `introduction` directory and then start Jupyter as follows:
+Now, we are going to start our journey to production with a familiar Python tools. The first of those (which isn't necessarily specific to Python, but is Python focused) is [Jupyter](http://jupyter.org/). Navigate to the `introduction` directory and then start Jupyter as follows:
 
 ```
 $ cd introduction
@@ -65,33 +65,36 @@ $ jupyter notebook --no-browser --port 8888 --ip=* --NotebookApp.token=''
 
 You will now be able to visit `<your-instance-IP>:8888` in a browser to use Jupyter. When you are ready to stop using Jupyter, you can type `CTRL+c` in the terminal to stop Jupyter.
 
-## 4. Running the example Python workflow
+## 4. Dealing with our data
 
-While you have Jupyter up and running, click on the `example_sklearn_workflow.ipynb` notebook (which you should see in the `introduction` directory). This will bring up our example notebook. If you are new to Jupyter notebooks, you can:
+While you have Jupyter up and running, click on the `example1_data_munging.ipynb` notebook (which you should see in the `example1` directory). This will bring up our example notebook for parsing and manipulating data. If you are new to Jupyter notebooks, you can:
 
 - click in any code block/cell to modify or run that code
 - type `shift+enter` to execute a code block (or use the widgets at the top of the UI)
 - if you get in a pickle, you might try selecting the "Kernel" menu at the top of the UI and then select "Restart Kernel" or similar.
 
-We will run through and discuss this notebook interactively in class. Our example problem for the day will be the [Iris flower classification problem](https://en.wikipedia.org/wiki/Iris_flower_data_set), and we will start by solving that problem using scikit-learn.
+We will run through and discuss this notebook interactively in class. 
 
-## 5. Discussing how we might productionize the workflow
+**Exercise** - This brings us to our first official "exercise" in the course. Instead of looking at a pre-baked solution that implements the above steps, try it out on your own! To do this:
 
-It might not be clear what "productionize" means or how we might try doing that. This will be discussed in class, but before or during our conversation think about:
+    - Start Jupyter again (if it's not still running),
+    - Navigate to the [template1](exercises/template1) directory, and
+    - Open up the `template1_` notebook.
 
-- What characteristics should a production AI workflow exhibit?
-- What differentiates a production AI workflow from a non-production workflow?
-- In what environments do production AI workflows run? 
-- Are scaling and deployment the same thing?
-- How might data change as we move to production?
-- How do we want to manage our production AI workflows?
-- Do we treat all parts of our workflow the same as we move them to production?
-- What happens when our workflows fail at scale?
-- How does data ingress/egress happen at scale?
-- How will our workflow interact with other pieces of infrastruction or other applications?
-- How do we handle our dependencies?
+This template notebook has some comments near the bottom where you need to fill in the missing pieces. Try to fill in these pieces without looking at the `solution1_` notebook under `exercises/solution1`, but don't feel bad if you can't get it. When you are ready, look at the solution1 notebook to see how I implemented these step (which is not the only or necessarily best solution). Once everyone has a chance to work on this, we will go over the solution together.
 
-By the end of this discussion, we should decide on set of guidelines that should drive how we productionize our Python workflow.
+## 5. Developing a ML/AI model in Python
+
+Our example problem for the day will be the [Iris flower classification problem](https://en.wikipedia.org/wiki/Iris_flower_data_set), and we will start by solving that problem using scikit-learn. Scikit-learn is the first ML/AI framework that many people use, and so we will use it as our jumping off point. Restart Jupyter (if you don't have it running), and open `example2_model_training.ipynb` from the `example2` directory. 
+
+**Exercise** - Try implementing a model other than kNN with scikit-learn:
+
+- [template](exercises/template2)
+- [solution](exercises/solution2)
+
+## 6. The model development/utilization workflow
+
+Now that we have gotten our hands dirty building some models in Python, let's take a step back and think about the model development workflow in general. We will do this interactively in class via Q&A and via the class slides.
 
 ## Resources
 
@@ -100,15 +103,6 @@ Technical resources:
 - [Jupyter](http://jupyter.org/)
 - [Pandas](https://pandas.pydata.org/)
 - [scikit-learn](http://scikit-learn.org/stable/)
-- [Introduction to Neural Networks](http://blog.kaggle.com/2017/11/27/introduction-to-neural-networks/)
-
-Articles:
-
-- [A Guide to Building a High Functioning Data Science Department](http://multithreaded.stitchfix.com/blog/2016/03/16/engineers-shouldnt-write-etl/)  
-- [Data Science at the Speed of Hype](http://www.john-foreman.com/blog/surviving-data-science-at-the-speed-of-hype)   
-- [How we do Data Science at People Pattern](https://www.peoplepattern.com/post.html#!/how-we-do-data-science-at-people-pattern)  
-- [Doing Data Science at Twitter](https://medium.com/@rchang/my-two-year-journey-as-a-data-scientist-at-twitter-f0c13298aee6)
-- [Data Science Bill of Rights](http://www.pachyderm.io/dsbor.html)
 
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
