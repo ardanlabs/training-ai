@@ -1,15 +1,15 @@
-# Introduction to productionizing ML/AI
+# Introduction to Python tooling and ML/AI workflows
 
-This material introduces some of the commonly used Python tooling for data science and ML/AI. Once you are done with this material, you will understand what sets of tools are used in producing AI models, and how data scientists often interact with those tools.
+This material introduces some of the commonly used Python tooling for data science and ML/AI. It also introduces the ML/AI model development workflow. Once you are done with this material, you will understand what sets of tools are used in producing AI models, and how data scientists often interact with those tools.
 
 You can follow this guide as we work through the material in class. Most of the commands/instructions that will be given in class are repeated here, so you can follow along and/or catch up when needed. Specifically, this guide will walk you through:
 
 1. [Connecting to your workshop instance](#1-connecting-to-your-workshop-instance)
 2. [Cloning the workshop material](#2-cloning-the-workshop-material)
 3. [Starting Jupyter](#3-starting-jupyter)
-4. [blah](#4-running-the-example-python-workflow)
-5. [blah](#5-discussing-how-we-might-productionize-the-workflow)
-
+4. [Dealing with data](#4-dealing-with-our-data)
+5. [Developing a ML/AI model in Python](#5-developing-a-mlai-model-in-python)
+6. [The model development/utilization workflow](#6-the-model-developmentutilization-workflow)
 
 It also includes a [list of resources](#resources) for those that want to dive in a little bit deeper.
 
