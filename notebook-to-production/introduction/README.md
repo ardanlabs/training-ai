@@ -51,7 +51,7 @@ This will pull down the workshop materials to your instance. To confirm that the
 ```
 $ cd training-ai/notebook-to-production/
 $ ls
-deploying_managing  frameworks_that_scale  introduction  pipeline_stages  portability  README.md
+README.md             deploying_managing    frameworks_that_scale introduction          pipeline_stages       productionizing
 ```
 
 ## 3. Starting Jupyter

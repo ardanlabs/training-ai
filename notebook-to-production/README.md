@@ -1,6 +1,6 @@
 # Python-based workflows - from notebook to production
 
-This material is for intermediate-level data scientists, developers, data engineers, or researchers. Specifically, this material is for those who have some interest in or experience with developing ML/AI models on sample data sets (maybe in Jupyter), but who might struggle to understand the full ML/AI workflow and scale, deploy, and productionize their work. They need to understand which Python tools to use as they scale our workflows beyond the notebook, and they need to understand how to manage and distribute work on large data.
+This material is for intermediate-level data scientists, developers, data engineers, or researchers. Specifically, this material is for those who have some interest in or experience with developing ML/AI models on sample data sets (maybe in Jupyter), but who might struggle to understand the full ML/AI workflow and scale, deploy, and productionize their work. They need to understand which Python tools to use as they scale workflows beyond the notebook, and they need to understand how to manage and distribute work on large data.
 
 - [Slides from the class](https://docs.google.com/presentation/d/1vhINmKo-gIoDU1vVDqpg51auZpPkFV0h_X-ukdyYsFc/edit?usp=sharing)
 - Instructor - Daniel Whitenack
@@ -39,12 +39,6 @@ This material introduces some methods and frameworks that will help our workflow
 This material walks you through breaking up a workflow, contained in a Jupyter notebook, into separate, scalable pipeline stages. Once you are done with this material, you will understand which portions of a ML/AI pipeline might benefit from being managed in isolation. You will also get some experience writing code for specific stages of a data pipeline (pre-processing, training, inference).
 
 [Breaking our workflow up into pipeline stages](pipeline_stages)
-
-## Making our pipeline stages portable
-
-This material introduces you to one way of making each stage of your AI pipeline portable, Docker. Once you are done with this material you will know how to port local Python code to cloud/on-prem instances via Docker. 
-
-[Making our pipeline stages portable](portability)
 
 ## Deploying, scaling, and managing our pipeline
 

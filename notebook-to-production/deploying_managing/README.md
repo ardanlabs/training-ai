@@ -4,7 +4,7 @@ This material introduces you to methods for orchestrating a multi-stage AI pipel
 
 This guide will walk you through:
 
-1. [Discussing AI pipeline orchestration, intro to k8s and Pachyderm](#1-discussing-ai-pipeline-orchestration)
+1. [Discussing AI pipeline orchestration, intro to k8s, KubeFlow, Seldon, and Pachyderm](#1-discussing-ai-pipeline-orchestration)
 2. [Connecting to your Pachyderm cluster](#2-connect-to-your-pachyderm-cluster)
 3. [Creating the input "data repositories"](README.md#3-create-the-input-data-repositories)
 4. [Committing the training data set into Pachyderm](README.md#4-commit-the-training-data-set-into-pachyderm)
@@ -321,6 +321,11 @@ model.pt            file                787B
 We could get this model to examine it, rerun it, revert to a different model, etc.
 
 ## Resources
+
+KubeFlow:
+
+- KubeFlow [org on GitHub](https://github.com/kubeflow/kubeflow)
+- KubeFlow + Pachyderm + Seldon model CI/CD and inference pipeline example [here](https://github.com/dwhitena/examples/tree/master/github_issue_summarization/pachyderm_seldon_kvc)
 
 Pachyderm:
 

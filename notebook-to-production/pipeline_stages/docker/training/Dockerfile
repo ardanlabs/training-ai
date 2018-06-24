@@ -1,4 +1,4 @@
-FROM python
+FROM python:3.6
 
 # Install dependencies
 RUN pip install -U \
@@ -10,4 +10,4 @@ RUN pip install -U \
     torchvision
 
 # Add our code
-ADD infer.py /code/infer.py
+ADD train.py /code/train.py

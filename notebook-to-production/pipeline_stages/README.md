@@ -73,6 +73,27 @@ We're almost there! We just need our last inference stage.
 
 You can start with [template2.py](exercise2/template2.py) and check [solution2.py](exercise2/solution2.py) when you are ready.
 
+## 5. Docker-izing our pipeline stages
+
+Ok, we have our code for model training, inference, and pre-processing and we need to:
+
+- scale this code up to larger data sets,
+- run it automatically at certain times or based on certain events,
+- share it with teammates so they can generate their own results, or
+- connect it to other code running in our company's infrastructure.
+
+How can we do this with a high degree of reproducibility and operational/computation efficiency? And how can we ensure that our engineering team doesn't hate the data science team because they always have to deploy data science things in a "special" way with "special" data science tools.
+
+Docker solves many of these issues and even has additional benefits. Data scientists and AI researchers are also latching on to these because they can:
+
+- Docker-ize an application quickly, hand it off to an engineering organization, and have them run it in a manner similar to any other application.
+- Experiment with a huge number of tools (Tensorflow, PyTorch, Spark, etc.) without having to install anything other than Docker.
+- Manage a diverse set of data pipeline stages in a unified way.
+- Leverage the huge number of excellent infrastructure projects for containers (e.g., those powering Google scale work) to create application that auto-scale, self-heal, are fault tolerant, etc.
+- Easily define and reproduce environments for experimentation.
+
+We will be using Docker to make our pipeline stages portable. If you are interested in the specifics of the Docker images we are using, check out the [docker](docker) directory here.
+
 ## Resources
 
 - [Python command line arguments](https://docs.python.org/3.3/library/argparse.html)
