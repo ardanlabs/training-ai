@@ -74,7 +74,7 @@ training            8 seconds ago       0B
 We have our training data repository, but we haven't put our training data set into this repository yet. To get this data into Pachyderm, we run:
 
 ```
-$ pachctl put-file training master iris.csv -c -f data/iris.csv
+$ pachctl put-file training master iris.csv -f data/iris.csv
 ```
 
 Then, you should be able to see the following:
@@ -159,8 +159,8 @@ model.pt            file                787B
 Great! We now have a trained model that will infer the species of Iris flowers.  Let's commit some example flower attributes into Pachyderm that we would like to run through the model.  We have a couple examples under [data](data).  Feel free to use these or create your own.  To commit our samples, you can run:
 
 ```
-$ pachctl put-file attributes master test1.csv -c -f data/test1.csv
-$ pachctl put-file attributes master test2.csv -c -f data/test2.csv
+$ pachctl put-file attributes master test1.csv -f data/test1.csv
+$ pachctl put-file attributes master test2.csv -f data/test2.csv
 ```
 
 You should then see:
