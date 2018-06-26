@@ -52,7 +52,7 @@ Ok, we are off to the races. Now it's your turn!
 - read in the `x_train.csv` and `y_train.csv` from our pre-processing stage
 - initialize our PyTorch model
 - train our model
-- save our moel to a file
+- save our model to a file
 
 You can start with [template1.py](exercise1/template1.py) and fill in the missing pieces. Check [solution1.py](exercise1/solution1.py) when you are ready. To modify `template1.py`, you can use an editor built into the terminal directly on your workshop instance (e.g., `vim` or `nano`), or you could copy over the contents of `template1.py` to your local machine and use your editor of choice. 
 
