@@ -2,7 +2,7 @@ FROM alpine:3.7
 
 # Add gophernotes
 
-ENV CGO_ENABLED=1 CGO_CPPFLAGS="-I/usr/include" GOOS=linux
+ENV CGO_ENABLED=1 CGO_CPPFLAGS="-I/usr/include"
 
 # Install Jupyter and gophernotes.
 RUN set -x \
