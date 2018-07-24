@@ -1,5 +1,3 @@
 # Created by .ignore support plugin (hsz.mobi)
-/notebook-to-production/introduction/exampleCsv/.ipynb_checkpoints/
-/notebook-to-production/introduction/exampleJson/.ipynb_checkpoints/
 /.idea/*
-/notebook-to-production/introduction/exampleLinearRegression/.ipynb_checkpoints/
+/machine-learning-with-go/*/*/.ipynb_checkpoints/*
