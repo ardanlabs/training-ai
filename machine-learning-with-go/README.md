@@ -2,7 +2,7 @@
 
 This is material for any Go developer, data scientist, analyst, or statistician who wishes to learn how to build robust machine learning (ML) applications in Go. This class provides an intensive, comprehensive and idiomatic view on training, utilizing, evaluating, and deploying machine learning models using Go. We believe this class is perfect for anyone wishing to build data-driven applications that produce valuable insights, have reproducible behavior, and can be deployed within modern architectures.
 
-- Slides from the class (coming soon)
+- [Slides from the class](https://docs.google.com/presentation/d/1BMRPCNPptXsLxw40-1c7HG2UEXOK-sBp8OfloJrCv6I/edit?usp=sharing)
 - Instructors 
   - Daniel Whitenack - author of [Machine Learning with Go](https://www.packtpub.com/big-data-and-business-intelligence/machine-learning-go), [website/blog](http://www.datadan.io/), [twitter](https://twitter.com/dwhitena), [github](https://github.com/dwhitena)
   - Diana Ortega - [twitter](https://twitter.com/dicaormu)
