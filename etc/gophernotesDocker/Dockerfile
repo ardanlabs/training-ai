@@ -92,7 +92,10 @@ RUN set -x \
     && go get github.com/pkg/errors \
     && go get github.com/stretchr/testify/assert \
     && go get github.com/kniren/gota/dataframe \
-    && go get github.com/skelterjohn/go.matrix
+    && go get github.com/skelterjohn/go.matrix\
+    && go get github.com/gonum/matrix/mat64\
+    && go get github.com/gonum/stat \
+    && go get github.com/mash/gokmeans
 
 EXPOSE 8888
 CMD [ "jupyter", "notebook", "--no-browser", "--ip=*",  "--NotebookApp.token=''", "--NotebookApp.disable_check_xsrf=True" ]
