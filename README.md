@@ -16,13 +16,5 @@ This is material for any Go developer, data scientist, analyst, or statistician 
 
 [Machine Learning with Go](machine-learning-with-go)
 
-## Deep Learning with Tensorflow or PyTorch
-
-Coming soon...
-
-## AI on Kubernetes
-
-Coming soon...
-
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
