@@ -1,4 +1,4 @@
-![Alt text](banner.png)
+![Alt text](https://docs.google.com/drawings/d/e/2PACX-1vT37glyZXd8ViXedt0LCSpzsbWCUSSLhWuR3o5_74tL92fh7zeIo3hVtCzhnpw8IeWAM-KcI419cIkm/pub?w=745&h=310)
 
 # Machine Learning with Go
 
@@ -6,7 +6,7 @@ This is material for any Go developer, data scientist, analyst, or statistician 
 
 - [Slides from the class](https://docs.google.com/presentation/d/1BMRPCNPptXsLxw40-1c7HG2UEXOK-sBp8OfloJrCv6I/edit?usp=sharing)
 - Instructors 
-  - Daniel Whitenack - author of [Machine Learning with Go](https://www.packtpub.com/big-data-and-business-intelligence/machine-learning-go), [website/blog](http://www.datadan.io/), [twitter](https://twitter.com/dwhitena), [github](https://github.com/dwhitena)
+  - Daniel Whitenack - author of [Machine Learning with Go](https://www.packtpub.com/big-data-and-business-intelligence/machine-learning-go), [website/blog](http://www.datadan.io/), [online courses](http://learn.datadan.io/), [twitter](https://twitter.com/dwhitena), [github](https://github.com/dwhitena)
   - Diana Ortega - [twitter](https://twitter.com/dicaormu)
 - Prerequisties/getting started:
   - You will need to ssh into a cloud instance. Remind yourself of how to do that and install a client if needed:
@@ -19,9 +19,9 @@ This is material for any Go developer, data scientist, analyst, or statistician 
 
 ## ML and the ML workflow
 
-This material introduces the basics of machine learning and the workflow that should be used when developing and utilizing machine learning models. Once you are done with this material, you will be exposed to the most commonly used machine learning techniques and you will understand the significance of training, evaluation, validation, and inference. 
+This material introduces the basics of machine learning and the workflow that should be used when developing and utilizing machine learning models. Once you are done with this material, you will be exposed to the most commonly used machine learning techniques and you will understand the significance of data profiling, training, evaluation, validation, and inference. 
 
-[ML and the ML workflow](ml_workflow)
+[ML and the ML workflow](ml_intro)
 
 ## ML with Go
 
@@ -31,27 +31,9 @@ This material introduces some Go packages and frameworks that will help us imple
 
 ## Building a complete Go-based ML workflow
 
-This material walks you through a full ML workflow with Go, from data ingress to training to evaluation to inference . Once you are done with this material, you know how to implement the stages of the ML workflow in Go (for at least one type of ML model and data), and you will be able to transfer this workflow scaffolding to other problems.
+This material walks you through a lab in which you will implement a full ML workflow with Go, from data ingress to training to evaluation to inference. Once you are done with this material, you know how to implement and deploy the stages of the ML workflow in Go (for at least one type of ML model and data), and you will be able to transfer this workflow scaffolding to other problems.
 
-### Introducing the problem
-
-Coming soon...
-
-### Developing the pre-processing code
-
-Coming soon...
-
-### Developing the training and evaluation code
-
-Coming soon...
-
-### Developing the inference code
-
-Coming soon...
-
-### Managing our data and deploying the pipeline
-
-Coming soon...
+[Building a complete Go-based ML workflow](ml_workflow)
 
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).

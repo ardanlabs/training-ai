@@ -1,0 +1,22 @@
+{
+  "pipeline": {
+    "name": "model"
+  },
+  "transform": {
+    "image": "gopherdata/gc2018:training",
+    "cmd": [ 
+      "/train", 
+      "-inFile=/pfs/training_data/training_prod.csv", 
+      "-outDir=/pfs/out"
+    ] 
+  },
+  "parallelism_spec": {
+    "constant": "1"
+  },
+  "input": {
+    "atom": {
+      "repo": "training_data",
+      "glob": "/"
+    }
+  }
+}

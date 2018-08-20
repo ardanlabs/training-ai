@@ -1,0 +1,22 @@
+{
+  "pipeline": {
+    "name": "qc_pre_process"
+  },
+  "transform": {
+    "image": "gopherdata/gc2018:qcpre",
+    "cmd": [ 
+      "/qcpre",
+      "-inFile=/pfs/qc_data/holdout.csv",
+      "-outDir=/pfs/out"
+    ] 
+  },
+  "parallelism_spec": {
+    "constant": "1"
+  },
+  "input": {
+    "atom": {
+      "repo": "qc_data",
+      "glob": "/"
+    }
+  }
+}
