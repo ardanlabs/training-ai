@@ -30,8 +30,7 @@ In this notebook, we are going to analyse the data of weights and heights of pla
 
 There is not only neural networks that can solve complex classification problems or clustering.
 We are going to explore a dataset with and unsupervised algorithme called K-means, where we try to figure out which are the bests clusters in our dataset and find a cluster model.
-We are going to use the "cereal" dataset found in https://www.kaggle.com/jeandsantos/breakfast-cereals-data-analysis-and-clustering 
-
+We are going to use the "fleet_data" dataset found as an example in the book [Machine Learning with Go](#resources)
 
 ## Resources
 
