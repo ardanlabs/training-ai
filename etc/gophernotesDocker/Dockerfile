@@ -95,7 +95,9 @@ RUN set -x \
     && go get github.com/skelterjohn/go.matrix\
     && go get github.com/gonum/matrix/mat64\
     && go get github.com/gonum/stat \
-    && go get github.com/mash/gokmeans
+    && go get github.com/mash/gokmeans \
+    && go get github.com/garyburd/go-oauth/oauth \
+    && go get github.com/machinebox/sdk-go/textbox
 
 EXPOSE 8888
 CMD [ "jupyter", "notebook", "--no-browser", "--ip=*",  "--NotebookApp.token=''", "--NotebookApp.disable_check_xsrf=True" ]

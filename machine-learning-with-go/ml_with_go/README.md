@@ -1,36 +1,55 @@
 # ML with Go
 
-This material introduces some Go packages and frameworks that will help us implement ML in Go. Once you are done with this material, you will know where to look to find ML-related packages for Go, have some hands-on experience working with these packages, and understand the utility of Go for ML.
+This material introduces some Go packages and frameworks that will help us implement ML in Go. Once you are done with this material, you will know where to look to find ML-related packages for Go, have some hands-on experience working with these packages, and understand the various types of machine learning models.
 
 This section is meant to be a survey of Go packages and frameworks related to ML along with some hands-on exercises using those packages and frameworks. We will be referring back to the ML workflow introduced in [the last section](../ml_workflow) as necessary.  This guide will walk you through:
 
-1. [Data loading and gathering](#1.-data-loading-and-gathering)
-2. [Data analysis and visualisation](#2.-data-analysis-and-visualisation)
-3. [Classification and clustering](#3.-classification-and-clustering)
+1. [Gathering, Profiling, and Cleaning Data](#1-gathering-profiling-and-cleaning-data)
+2. [Defining, Training, and Testing Models](#2-defining-training-and-testing-models)
+3. [(Bonus) More sophisticated models](#3-bonus-more-sophisticated-models)
 
 It also includes a [list of resources](#resources) for those that want to dive in a little bit deeper.
 
-## 1. Data loading and gathering
+## 1. Gathering, Profiling, and Cleaning Data
 
-We are going to start exploring some JSON data. The dataset comes from the Emoji Similarity Baseline Dataset, with 508 Emoji Pairs and Similarity Ratings. From https://www.kaggle.com/sanjayaw/emosim508
-The objective is to start using Jupyter notebooks and exploring data.
+In this section, we will look at how we can import, parse, manipulate, and profile data with Go. Note, there are innumerable types and formats of data that you might have to deal with in an ML/AI workflow (CSV, JSON, Parquet, Avro,  etc.), and we won't cover all of them. Rather, we will highlight a few of the main Go packages that you can utilize for data gathering,  profiling, and cleaning.  We will look at two different example data sets using Jupyter: (i) an [emoji data set](https://www.kaggle.com/sanjayaw/emosim508) in JSON format, and (ii) a [Game of Thrones data set](https://github.com/chrisalbon/war_of_the_five_kings_dataset) in CSV format.
 
-Then we are going to use the War Of The Five Kings dataset.
-Part of the strength of the models that we build is in the data that we feed them. So we have to choose the good type of data for the right type of model. 
-This second part of the notebook is based in the analysis made in https://github.com/chrisalbon/war_of_the_five_kings_dataset, and is based on the dataset of the battles in the War of the Five Kings from George R.R. Martin's A Song Of Ice And Fire series.
+**Example**: [example1/example1.ipynb](example1/example1.ipynb). 
+
+**Exercise** - TBD
+
+## 2. Defining, Training, and Testing Models
+
+### Regression
+
+To make correct predictions, we need to understand the relationships between variables in our data and model this using statistical methods. One of those methods is called regression. In this example notebook, we are going to create a regression model to predict the weights of baseball players based on their height.
+
+**Example**: [example2/example2.ipynb](example2/example2.ipynb). 
+
+**Exercise** - TBD
+
+### Classification
+
+Sometimes we don't need to predict a continuous value (like weight, stock price, or temperature). We might need to predict whether some observation belong to one or more discrete labels/classes (e.g., fraud or not fraud). In this example notebook, we will create a couple of classification models that predict flower species from physical measurements of flowers.
+
+**Example**: [example3/example3.ipynb](example3/example3.ipynb). 
+
+**Exercise** - TBD
+
+### Clustering
+
+Both regression and classification are considered "supervised" learning techniques, where we are trying to predict something based on labeled examples of that thing. However, there are also "unsupervised" learning techniques to, for example, detect groupings in your data set when you don't know what groups exist. This is called clustering, and we will look at one clustering algorithm in the following notebook called k-means.
+
+**Example**: [example4/example4.ipynb](example4/example4.ipynb). 
+
+**Exercise** - TBD
 
 
-## 2. Data analysis and visualisation
+## 3. (Bonus) More sophisticated models
 
-To make correct decisions, you have to analyse your Data. This analysis use Datasets. It is important a fundamental understanding of probability and statistics to understand your Data.
-In this notebook, we are going to analyse the data of weights and heights of players of the NBL.
+Sometimes we may need a model that is more complicated than linear regression or kNN. Go has us covered here. We can interface with major frameworks like TensorFlow, utilize more Go-centric frameworks like Gorgonia, or utilize services like MachineBox.  Moreover, in some cases (e.g., streaming ML analysis) we may want to leverage Go's built in concurrency primitives. 
 
-
-## 3. Classification and clustering
-
-There is not only neural networks that can solve complex classification problems or clustering.
-We are going to explore a dataset with and unsupervised algorithme called K-means, where we try to figure out which are the bests clusters in our dataset and find a cluster model.
-We are going to use the "fleet_data" dataset found as an example in the book [Machine Learning with Go](#resources)
+[This bonus material](bonus), which we may or may not get to cover in the workshop, provides some more info about these methods and gives a couple of examples.
 
 ## Resources
 
