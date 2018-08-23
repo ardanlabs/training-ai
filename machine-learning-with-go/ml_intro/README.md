@@ -46,7 +46,7 @@ README.md   ml_intro    ml_with_go  ml_workflow
 Now, we are going to start our journey in Go ML with a tool that is familiar to many ML/AI devs called [Jupyter](http://jupyter.org/). To make this easy, the organizers have create a docker image with Jupyter and a Go kernel for Jupyter called `gophernotes`. You could run Jupyter locally for this sort of development work (which would be the typical case), but for this workshop just run the following from your workshop instance:
 
 ```
-$ docker run -it -p 8888:8888 -v /home/pachrat/training-ai/machine-learning-with-go:/notebooks dwhitena/gophernotes:gc
+$ docker run -it -p 8888:8888 -v /home/pachrat/training-ai/machine-learning-with-go:/notebooks dicaormu/gophernotes:gc
 ```
 
 You will now be able to visit `<your-workshop-instance-IP>:8888` in a browser to use Jupyter. When you are ready to stop using Jupyter, you can type `CTRL+c` in the terminal to stop Jupyter.
