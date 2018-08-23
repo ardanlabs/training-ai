@@ -14,9 +14,7 @@ It also includes a [list of resources](#resources) for those that want to dive i
 
 In this section, we will look at how we can import, parse, manipulate, and profile data with Go. Note, there are innumerable types and formats of data that you might have to deal with in an ML/AI workflow (CSV, JSON, Parquet, Avro,  etc.), and we won't cover all of them. Rather, we will highlight a few of the main Go packages that you can utilize for data gathering,  profiling, and cleaning.  We will look at two different example data sets using Jupyter: (i) an [emoji data set](https://www.kaggle.com/sanjayaw/emosim508) in JSON format, and (ii) a [Game of Thrones data set](https://github.com/chrisalbon/war_of_the_five_kings_dataset) in CSV format.
 
-**Example**: [example1/example1.ipynb](example1/example1.ipynb). 
-
-**Exercise** - TBD
+**Example**: [example1/example1.ipynb](example1/example1.ipynb) 
 
 ## 2. Defining, Training, and Testing Models
 
@@ -24,9 +22,9 @@ In this section, we will look at how we can import, parse, manipulate, and profi
 
 To make correct predictions, we need to understand the relationships between variables in our data and model this using statistical methods. One of those methods is called regression. In this example notebook, we are going to create a regression model to predict the weights of baseball players based on their height.
 
-**Example**: [example2/example2.ipynb](example2/example2.ipynb). 
+**Example**: [example2/example2.ipynb](example2/example2.ipynb) 
 
-**Exercise** - TBD
+**Exercise** - Try using `github.com/sajari/regression` to train our regression model instead of `gonum`. *Hint* - look at the examples [here](https://github.com/sajari/regression). When you are ready, you can look at our solution notebook [here](solutions/solution1.ipynb). 
 
 ### Classification
 
@@ -34,7 +32,7 @@ Sometimes we don't need to predict a continuous value (like weight, stock price,
 
 **Example**: [example3/example3.ipynb](example3/example3.ipynb). 
 
-**Exercise** - TBD
+**Exercise** - Test out our kNN model for multiple *k* values to determine what *k* value we should use. When you are ready, you can look at our solution notebook [here](solutions/solution2.ipynb). 
 
 ### Clustering
 
