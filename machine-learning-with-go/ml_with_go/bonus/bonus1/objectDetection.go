@@ -204,8 +204,8 @@ func readLabels(labelsPath string) []labelItem {
 
 func main() {
 	// WARNING!!! change to the path of your model, labels and image
-	modelPath := "/home/model/training-ai/machine-learning-with-go/ml_with_go/data/ssd_mobilenet_v1_coco_2018_01_28/saved_model"
-	labelsPath := "/home/ml/training-ai/machine-learning-with-go/ml_with_go/data/ssd_mobilenet_v1_coco_2018_01_28/labels.json"
-	imagePath := "/home/notebooks/training-ai/machine-learning-with-go/ml_with_go/data/office.png"
+	modelPath := "/go/src/machine-learning-with-go/data/ssd_mobilenet_v1_coco_2018_01_28/saved_model"
+	labelsPath := "/go/src/machine-learning-with-go/data/ssd_mobilenet_labels/labels.json"
+	imagePath := "/go/src/machine-learning-with-go/data/office.png"
 	Prediction(modelPath, imagePath, labelsPath)
 }
