@@ -17,11 +17,25 @@ We should all strive for simplicity (which is a mantra of the Go community), but
 ## Examples
 
 [Object detection with TensorFlow and GoCV](bonus1/bonus1.go)  
-[Streaming sentiment analysis with MachineBox](bonus2/bonus2.ipynb)  
+[Streaming sentiment analysis with MachineBox](bonus3/bonus3.ipynb)  
 
 ## Exercises
 
 ### Exercise 1
+
+Recreate the object detection example on your local machine by:
+
+1. [Install Tensorflow](https://www.tensorflow.org/install/install_go), or you can use the pre-built docker image
+found in dicaormu/tensorflow-go
+```
+docker run -it -p 8887:8888 -v PATH-TO-YOUR-PROJECT/training-ai/machine-learning-with-go/ml_with_go:/go/src/machine-learning-with-go dicaormu/tensorflow-go
+``` 
+2. Download the Tensorflow model from [here](http://download.tensorflow.org/models/object_detection/ssd_mobilenet_v1_coco_2018_01_28.tar.gz)
+3. Unzip the model files in the dara folder.
+4. Modify the paths in the main to point to your model, labels and image
+5. Run  the example
+
+### Exercise 2
 
 Recreate the object detection example on your local machine by:
 
@@ -31,7 +45,7 @@ Recreate the object detection example on your local machine by:
 4. Build the bonus1 example with `go build`.
 5. Run the example with `./bonus1 0 <modelfile> <descriptionsfile>`
 
-### Exercise 2
+### Exercise 3
 
 Try running the streaming analysis of tweets included in the [bonus2](bonus2) notebook with your own Twitter creds:
 

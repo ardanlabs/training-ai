@@ -10,9 +10,14 @@ This section is meant to be a survey of Go packages and frameworks related to ML
 
 It also includes a [list of resources](#resources) for those that want to dive in a little bit deeper.
 
+For each session there is a notebook with the number of the session. For example, for section 1, is example1
+
+
 ## 1. Gathering, Profiling, and Cleaning Data
 
 In this section, we will look at how we can import, parse, manipulate, and profile data with Go. Note, there are innumerable types and formats of data that you might have to deal with in an ML/AI workflow (CSV, JSON, Parquet, Avro,  etc.), and we won't cover all of them. Rather, we will highlight a few of the main Go packages that you can utilize for data gathering,  profiling, and cleaning.  We will look at two different example data sets using Jupyter: (i) an [emoji data set](https://www.kaggle.com/sanjayaw/emosim508) in JSON format, and (ii) a [Game of Thrones data set](https://github.com/chrisalbon/war_of_the_five_kings_dataset) in CSV format.
+
+For running each cell in the notebook, use ctrl+intro
 
 **Example**: [example1/example1.ipynb](example1/example1.ipynb) 
 
