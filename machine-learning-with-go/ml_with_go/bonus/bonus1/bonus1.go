@@ -1,16 +1,17 @@
 package main
 
 import (
-	"fmt"
-	"log"
-	tf "github.com/tensorflow/tensorflow/tensorflow/go"
-	"os"
-	"image"
-	"io"
-	"image/png"
 	"encoding/json"
+	"fmt"
+	"image"
+	"image/png"
+	"io"
 	"io/ioutil"
+	"log"
+	"os"
 	"reflect"
+
+	tf "github.com/tensorflow/tensorflow/tensorflow/go"
 )
 
 const (
@@ -18,18 +19,20 @@ const (
 	channels  = 3
 )
 
+// labelItem contains information about labels.
 type labelItem struct {
 	Name        string `json:"name"`
-	Id          int    `json:"id"`
+	ID          int    `json:"id"`
 	DisplayName string `json:"display_name"`
 }
 
-// img.At(x, y).RGBA() returns four uint32 values; we want a Pixel in uint8
+// rbgzToPixel returns a Pixel in uint8.
 func rgbaToPixel(r uint32, g uint32, b uint32, a uint32) []uint8 {
 	return []uint8{uint8(r / 256), uint8(g / 256), uint8(b / 256)}
 }
 
 func loadImageAsTensor(filePath string) (*tf.Tensor, error) {
+
 	// open path for image
 	file, err := os.Open(filePath)
 	if err != nil {
@@ -60,7 +63,8 @@ func loadImageAsTensor(filePath string) (*tf.Tensor, error) {
 	return tf.NewTensor(imageData)
 }
 
-//load an image from a file and transform it to [][][] uint8. each dimension represents a channel (RGB)
+// loadOneImageFromFile loads an image from a file and transform it
+// to [][][] uint8. each dimension represents a channel (RGB).
 func loadOneImageFromFile(imageName string) [][][]uint8 {
 	fmt.Println("opening", imageName)
 	existingImageFile, err := os.Open(imageName)
@@ -103,7 +107,7 @@ func loadModel(modeldir *string) (*tf.SavedModel, error) {
 	return tf.LoadSavedModel(*modeldir, []string{"serve"}, nil)
 }
 
-// function for predicting the objects found in an image .png
+// Prediction predicts the objects found in an image .png.
 func Prediction(modelPath, imagePath, labelsPath string) {
 	//load labels, we will use them later
 	labels := readLabels(labelsPath)
@@ -153,7 +157,7 @@ func Prediction(modelPath, imagePath, labelsPath string) {
 * result[0]= detection_scores
 * result[1]= detection_classes
 * result[2]= detection_boxes
-*/
+ */
 func parseResult(result []*tf.Tensor, labels []labelItem) {
 	//each position of the result vector is of type interface{}, we know it is an array.
 	//we must read values using reflection
@@ -178,7 +182,7 @@ func parseResult(result []*tf.Tensor, labels []labelItem) {
 // utility to find a labelItem from an id
 func findLabel(labels []labelItem, id int) labelItem {
 	for _, v := range labels {
-		if int(v.Id) == id {
+		if int(v.ID) == id {
 			return v
 		}
 	}

@@ -16,7 +16,8 @@ We should all strive for simplicity (which is a mantra of the Go community), but
 
 ## Examples
 
-[Object detection with TensorFlow and GoCV](bonus1/bonus1.go)  
+[Object detection with TensorFlow](bonus1/bonus1.go)
+[Streaming webcam object detection with GoCV](bonus2/bonus2.go)  
 [Streaming sentiment analysis with MachineBox](bonus3/bonus3.ipynb)  
 
 ## Exercises
@@ -43,7 +44,7 @@ Recreate the object detection example on your local machine by:
 2. Downloading the TensorFlow Inception model from [here](https://storage.googleapis.com/download.tensorflow.org/models/inception5h.zip)
 3. Unzip the Inception model files.
 4. Build the bonus1 example with `go build`.
-5. Run the example with `./bonus1 0 <modelfile> <descriptionsfile>`
+5. Run the example with `./bonus2 0 <modelfile> <descriptionsfile>`
 
 ### Exercise 3
 
