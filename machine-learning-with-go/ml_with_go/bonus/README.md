@@ -52,6 +52,6 @@ Recreate the object detection example on your local machine by:
 
 Try running the streaming analysis of tweets included in the [bonus2](bonus2) notebook with your own Twitter creds:
 
-1. From Jupyter, navigate to the `bonus2.ipynb` notebook under `bonus2`
+1. From Jupyter, navigate to the `bonus3.ipynb` notebook under `bonus3`
 2. Replace the MachineBox IP and twitter creds with your own
 3. Experiment with different search criteria, different numbers of goroutines, etc.
