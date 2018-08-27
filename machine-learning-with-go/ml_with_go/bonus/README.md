@@ -16,7 +16,7 @@ We should all strive for simplicity (which is a mantra of the Go community), but
 
 ## Examples
 
-[Object detection with TensorFlow](bonus1/bonus1.go)
+[Object detection with TensorFlow](bonus1/bonus1.go)  
 [Streaming webcam object detection with GoCV](bonus2/bonus2.go)  
 [Streaming sentiment analysis with MachineBox](bonus3/bonus3.ipynb)  
 
@@ -28,9 +28,11 @@ Recreate the object detection example on your local machine by:
 
 1. [Install Tensorflow](https://www.tensorflow.org/install/install_go), or you can use the pre-built docker image
 found in dicaormu/tensorflow-go
-```
-docker run -it -p 8887:8888 -v PATH-TO-YOUR-PROJECT/training-ai/machine-learning-with-go/ml_with_go:/go/src/machine-learning-with-go dicaormu/tensorflow-go
-``` 
+
+    ```
+    docker run -it -p 8887:8888 -v PATH-TO-YOUR-PROJECT/training-ai/machine-learning-with-go/ml_with_go:/go/src/machine-learning-with-go dicaormu/tensorflow-go
+    ``` 
+    
 2. Download the Tensorflow model from [here](http://download.tensorflow.org/models/object_detection/ssd_mobilenet_v1_coco_2018_01_28.tar.gz)
 3. Unzip the model files in the dara folder.
 4. Modify the paths in the main to point to your model, labels and image
@@ -50,6 +52,6 @@ Recreate the object detection example on your local machine by:
 
 Try running the streaming analysis of tweets included in the [bonus2](bonus2) notebook with your own Twitter creds:
 
-1. From Jupyter, navigate to the `bonus2.ipynb` notebook under `bonus2`
+1. From Jupyter, navigate to the `bonus3.ipynb` notebook under `bonus3`
 2. Replace the MachineBox IP and twitter creds with your own
 3. Experiment with different search criteria, different numbers of goroutines, etc.

@@ -45,9 +45,6 @@ Both regression and classification are considered "supervised" learning techniqu
 
 **Example**: [example4/example4.ipynb](example4/example4.ipynb). 
 
-**Exercise** - TBD
-
-
 ## 3. (Bonus) More sophisticated models
 
 Sometimes we may need a model that is more complicated than linear regression or kNN. Go has us covered here. We can interface with major frameworks like TensorFlow, utilize more Go-centric frameworks like Gorgonia, or utilize services like MachineBox.  Moreover, in some cases (e.g., streaming ML analysis) we may want to leverage Go's built in concurrency primitives. 

@@ -7,7 +7,7 @@
     "cmd": [ 
       "/infer", 
       "-inModelDir=/pfs/qcontrol", 
-      "-inVarDir=/pfs/attributes", 
+      "-inVarDir=/pfs/attributes/", 
       "-outDir=/pfs/out"       
     ]
   },
