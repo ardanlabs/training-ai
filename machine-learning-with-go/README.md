@@ -11,7 +11,7 @@ This is material for any Go developer, data scientist, analyst, or statistician 
 - Prerequisties/getting started:
   - You will need to ssh into a cloud instance. Remind yourself of how to do that and install a client if needed:
     - On a Mac or Linux machine, you should be able to ssh from a terminal (see these [Mac instructions](http://accc.uic.edu/answer/how-do-i-use-ssh-and-sftp-mac-os-x) and [Linux instructions](https://www.digitalocean.com/community/tutorials/how-to-use-ssh-to-connect-to-a-remote-server-in-ubuntu)).
-    - On a Windows machine, you can either [install and use an ssh client (I recommend PuTTY)](https://www.putty.org/) or [use the WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
+    - On a Windows machine, you can either install and use an ssh client or [use the WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10) which has SSH built-in. A great console for WSL is [cmder](cmder.net).
   - You will also need to work a bit at the command line. If you are new to the command line or need a refresher, look through [this quick tutorial](https://lifehacker.com/5633909/who-needs-a-mouse-learn-to-use-the-command-line-for-almost-anything).
 - If you need further help productionizing Go ML/AI workflows, want to bring this class to your company, or just have ML/AI related questions, [Ardan Labs](https://www.ardanlabs.com/) is here to help! Reach out to the instructor using the links above or via the [Ardan Labs website](https://www.ardanlabs.com/). 
 
