@@ -16,7 +16,7 @@ We should all strive for simplicity (which is a mantra of the Go community), but
 
 ## Examples
 
-[Object detection with TensorFlow](bonus1/bonus1.go)
+[Object detection with TensorFlow](bonus1/bonus1.go)  
 [Streaming webcam object detection with GoCV](bonus2/bonus2.go)  
 [Streaming sentiment analysis with MachineBox](bonus3/bonus3.ipynb)  
 
