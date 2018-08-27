@@ -13,13 +13,13 @@ It also includes a [list of resources](#resources) for those that want to dive i
 
 ## 1. Connecting to your workshop instance
 
-You should have been given an IP for a remote machine at the beginning of the course.  The remote machine already has Jupyter, scikit-learn, PyTorch, Docker, etc. installed along with all of the command line tools we will be needing throughout the course.  To log into the remote machine on Linux or Mac, open and terminal and run:
+You should have been given an IP for a remote machine at the beginning of the course.  The remote machine already has Jupyter, scikit-learn, PyTorch, Docker, etc. installed along with all of the command line tools we will be needing throughout the course.  To log into the remote machine on Linux/Mac/Windows with WSL, open and terminal and run:
 
 ```
 $ ssh pachrat@<remote machine IP>
 ```
 
-On Windows you can use PuTTY or another ssh client.  You will be asked for a password, which you should also be given during the workshop.  To verify that everything is running correctly on the machine, you should be able to verify the Docker version installed on this instance by running:
+OYou will be asked for a password, which you should also be given during the workshop.  To verify that everything is running correctly on the machine, you should be able to verify the Docker version installed on this instance by running:
 
 ```
 $ docker version
