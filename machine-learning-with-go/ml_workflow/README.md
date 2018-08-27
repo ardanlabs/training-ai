@@ -6,15 +6,15 @@ This material walks you through a lab which will help you implement a full ML wo
 
 Specifically, this guide will walk you through:
 
-1. [Introduction to the Problem/Data](#1-introduction-to-the-problem-and-data)
-2. [Exploratory Model Development](#1-exploratory-model-development)
-3. [Preparation of scalable data pipeline stages](#2-preparation-of-scalable-data-pipeline-stages)
-4. [Deploying the data pipeline](#3-deploying-the-data-pipeline)
-5. [Managing, updating, and scaling the pipeline](#6-managing-updating-and-scaling-the-pipeline)
+1. [Introduction to the Problem and Data](#1-introduction-to-the-problem-and-data)
+2. [Exploratory Model Development](#2-exploratory-model-development)
+3. [Preparation of scalable data pipeline stages](#3-preparation-of-scalable-data-pipeline-stages)
+4. [Deploying the data pipeline](#4-deploying-the-data-pipeline)
+5. [Managing, updating, and scaling the pipeline](#5-managing-updating-and-scaling-the-pipeline)
 
 It also includes a [list of resources](#resources) for those that want to dive in a little bit deeper.
 
-## 1. Introduction to the problem and data
+## 1. Introduction to the Problem and Data
 
 The problem that we will be working on in this lab is the prediction of disease progression using regression. The data that we will be leveraging is data about the progression of the disease diabetes in a number of patients:
 
@@ -81,7 +81,7 @@ However, if you get done with the above exercise creating the pipeline stages, g
 - *Quality Control model check* - `gopherdata/gc2018:qcontrol`
 - *Inference* - `gopherdata/gc2018:inference`
 
-## Deploying the data pipeline
+## 4. Deploying the data pipeline
 
 Ok, we now have multiple Docker images that will allow us to deploy our data pipeline stages on some infrastructure (e.g., in the cloud), but how are we going to orchestrate and schedule all of that work? Well, as you probably know, the Go community has developed the now de facto standard container scheduler called Kubernetes, and we will be using it here!
 
@@ -91,7 +91,7 @@ We have already connected your workshop instances to a running Kubernetes cluste
 
 ![Alt text](https://docs.google.com/drawings/d/e/2PACX-1vSEuTeHVqRTzAmuQBILI_KExrF0oZsWJ_FaclWONTM60E_e5KfNUHAqK8S5L92R4AKjcmMWipkouUYd/pub?w=1537&h=612)
 
-## Managing, updating, and scaling the pipeline
+## 5. Managing, updating, and scaling the pipeline
 
 Congrats! You have deployed a full Go-based ML pipeline to a k8s cluster! Now let's try to update certain parts of this pipeline, scale particular stages, and monitor what happens. These are essential elements that need to be considered when putting ML in production.
 
