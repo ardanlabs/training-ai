@@ -7,7 +7,7 @@
     "cmd": [ 
       "/qcontrol", 
       "-inModelFile=/pfs/model/model.json", 
-      "-inTestDir=/pfs/qc_pre_process",
+      "-inTestDir=/pfs/qc_pre_process/",
       "-threshold=60.0", 
       "-outDir=/pfs/out"       
     ]
