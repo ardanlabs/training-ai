@@ -1,0 +1,55 @@
+#!/bin/bash
+# #####
+#
+# Install any software and setup environment for use in development.
+#
+#
+# #####
+
+set -e
+
+
+## Go
+
+### build
+
+brew install zmq
+
+go get -u github.com/gopherdata/gophernotes
+mkdir -p ~/Library/Jupyter/kernels/gophernotes
+cp $GOPATH/src/github.com/gopherdata/gophernotes/kernel/* ~/Library/Jupyter/kernels/gophernotes
+
+go get -u github.com/kniren/gota/dataframe
+go get -u gonum.org/v1/plot/...
+go get -u gonum.org/v1/gonum
+go get -u github.com/sajari/regression
+go get -u golang.org/x/text
+go get -insecure gonum.org/v1/plot/...
+go get -insecure gonum.org/v1/gonum/...
+go get github.com/kniren/gota/...
+go get github.com/sajari/regression
+go get github.com/sjwhitworth/golearn/...
+go get -insecure go-hep.org/x/hep/csvutil/...
+go get -insecure go-hep.org/x/hep/fit
+go get -insecure go-hep.org/x/hep/hbook
+go get github.com/montanaflynn/stats
+go get github.com/boltdb/bolt
+go get github.com/patrickmn/go-cache
+go get github.com/chewxy/math32
+go get gonum.org/v1/gonum/mat
+go get github.com/chewxy/hm
+go get -u gorgonia.org/vecf64
+go get -u gorgonia.org/vecf32
+go get github.com/awalterschulze/gographviz
+go get github.com/leesper/go_rng
+go get github.com/pkg/errors
+go get github.com/stretchr/testify/assert
+go get github.com/kniren/gota/dataframe
+go get github.com/skelterjohn/go.matrix
+go get github.com/gonum/matrix/mat64
+go get github.com/gonum/stat
+go get github.com/mash/gokmeans
+go get github.com/garyburd/go-oauth/oauth
+go get github.com/machinebox/sdk-go/textbox
+
+echo "ml env setup complete"

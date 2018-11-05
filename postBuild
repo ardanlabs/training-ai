@@ -1,0 +1,94 @@
+#!/bin/bash
+
+set -e
+
+GOVERS=1.11
+
+mkdir -p \
+	$HOME/.local/go/$GOVERS \
+	$HOME/go
+
+echo "::: install Go ${GOVERS}..."
+curl -O -L https://golang.org/dl/go${GOVERS}.linux-amd64.tar.gz
+tar -C $HOME/.local/go/$GOVERS -zxf go${GOVERS}.linux-amd64.tar.gz
+/bin/rm go${GOVERS}.linux-amd64.tar.gz
+
+export GOROOT=$HOME/.local/go/$GOVERS/go
+export GOPATH=$HOME/go
+export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+
+## install interesting packages
+echo "::: installing gophernotes, go-hep, gonum..."
+go get golang.org/x/tools/cmd/goimports
+#git clone -b jupyter-display-data https://github.com/sbinet-gonum/ng $GOPATH/src/neugram.io/ng
+go get -u github.com/kniren/gota/dataframe
+go get -u gonum.org/v1/plot/...
+go get -u gonum.org/v1/gonum
+go get -u github.com/sajari/regression
+go get -u golang.org/x/text
+go get -insecure gonum.org/v1/plot/...
+go get -insecure gonum.org/v1/gonum/...
+go get github.com/kniren/gota/...
+go get github.com/sajari/regression
+go get github.com/sjwhitworth/golearn/...
+go get -insecure go-hep.org/x/hep/csvutil/...
+go get -insecure go-hep.org/x/hep/fit
+go get -insecure go-hep.org/x/hep/hbook
+go get github.com/montanaflynn/stats
+go get github.com/boltdb/bolt
+go get github.com/patrickmn/go-cache
+go get github.com/chewxy/math32
+go get gonum.org/v1/gonum/mat
+go get github.com/chewxy/hm
+go get -u gorgonia.org/vecf64
+go get -u gorgonia.org/vecf32
+go get github.com/awalterschulze/gographviz
+go get github.com/leesper/go_rng
+go get github.com/pkg/errors
+go get github.com/stretchr/testify/assert
+go get github.com/kniren/gota/dataframe
+go get github.com/skelterjohn/go.matrix
+go get github.com/gonum/matrix/mat64
+go get github.com/gonum/stat
+go get github.com/mash/gokmeans
+go get github.com/garyburd/go-oauth/oauth
+go get github.com/machinebox/sdk-go/textbox
+echo "::: installing gophernotes, go-hep and gonum... [done]"
+
+## setup environment for Go
+
+cat >> $HOME/.setup-go << EOF
+## setup Go
+export GOROOT=$GOROOT
+export GOPATH=$GOPATH
+export PATH=\$GOPATH/bin:\$GOROOT/bin:\$PATH
+EOF
+
+cat >> $HOME/.bashrc << EOF
+. ~/.setup-go
+EOF
+
+## install the Go kernel
+mkdir -p ./binder/gophernotes
+cat >| ./binder/gophernotes/kernel.json << EOF
+{
+    "argv": [
+        "$GOPATH/bin/gophernotes",
+        "{connection_file}"
+    ],
+    "display_name": "Go",
+    "language": "go",
+    "name": "go",
+    "env": {
+        "GOPATH": "$GOPATH",
+        "GOROOT": "$GOROOT",
+        "PATH":   "$GOPATH/bin:$GOROOT/bin:$PATH"
+	}
+}
+EOF
+jupyter kernelspec install ./binder/gophernotes --user
+
+/bin/rm -rf binder
+
+echo "::: kernel list"
+jupyter kernelspec list
