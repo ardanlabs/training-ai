@@ -13,7 +13,7 @@ set -e
 
 ### build
 
-brew install zmq
+#brew install zmq
 
 go get -u github.com/gopherdata/gophernotes
 mkdir -p ~/Library/Jupyter/kernels/gophernotes
