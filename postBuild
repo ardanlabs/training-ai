@@ -21,6 +21,7 @@ export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 echo "::: installing gophernotes, go-hep, gonum..."
 go get golang.org/x/tools/cmd/goimports
 #git clone -b jupyter-display-data https://github.com/sbinet-gonum/ng $GOPATH/src/neugram.io/ng
+go get -v github.com/gopherdata/gophernotes
 go get -u github.com/kniren/gota/dataframe
 go get -u gonum.org/v1/plot/...
 go get -u gonum.org/v1/gonum/...
@@ -52,6 +53,8 @@ go get github.com/gonum/stat
 go get github.com/mash/gokmeans
 go get github.com/garyburd/go-oauth/oauth
 go get github.com/machinebox/sdk-go/textbox
+
+
 echo "::: installing gophernotes, go-hep and gonum... [done]"
 
 ## setup environment for Go
