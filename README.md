@@ -6,7 +6,7 @@
 
 ## Python-Based AI Workflows - From Notebook to Production Scale
 
-This material is for intermediate-level data scientists, developers, data engineers, or researchers. Specifically, this material is for those who have some experience developing ML/AI models on sample data sets (maybe in Jupyter), but who might struggle to scale, deploy, and productionize their work. They need to understand which Python tools to use as they scale our workflows beyond the notebook, and they need to understand how to manage and distribute work on large data. 
+This material is for intermediate-level data scientists, developers, data engineers, or researchers. Specifically, this material is for those who have some experience developing ML/AI models on sample data sets (maybe in Jupyter), but who might struggle to scale, deploy, and productionize their work. They need to understand which Python tools to use as they scale our workflows beyond the notebook, and they need to understand how to manage and distribute work on large data.
 
 [Python-based AI Workflows - From Notebook to Production Scale](notebook-to-production)
 
@@ -16,5 +16,7 @@ This is material for any Go developer, data scientist, analyst, or statistician 
 
 [Machine Learning with Go](machine-learning-with-go)
 
+To launch via mybinder:
+[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/Soypete/training-ai/master)
 ___
 All material is licensed under the [Apache License Version 2.0, January 2004](http://www.apache.org/licenses/LICENSE-2.0).
